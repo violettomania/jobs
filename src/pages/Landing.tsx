@@ -9,10 +9,11 @@ const Landing = () => {
     <Wrapper>
       <main>
         <nav>
-          <Logo />
+          <Link to='/'>
+            <Logo />
+          </Link>
         </nav>
         <div className='container page'>
-          {/* info */}
           <div className='info'>
             <h1>
               job <span>tracking</span> app
