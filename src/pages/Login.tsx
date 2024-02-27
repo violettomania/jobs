@@ -1,6 +1,6 @@
 import Wrapper from '../assets/wrappers/RegisterPage';
 
-const Register = () => {
+const Login = () => {
   return (
     <Wrapper className='full-page'>
       <form className='form'>
@@ -51,4 +51,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import SharedLayout from '../assets/wrappers/SharedLayout';
 import Error from '../pages/Error';
 import Landing from '../pages/Landing';
-import Register from '../pages/Register';
+import Login from '../pages/Login';
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<SharedLayout />} />
         <Route path='landing' element={<Landing />} />
-        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
         <Route path='*' element={<Error />} />
       </Routes>
       <ToastContainer position='bottom-right' />
