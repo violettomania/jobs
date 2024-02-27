@@ -2,6 +2,25 @@
   "extends": ["react-app", "react-app/jest"],
   "rules": {
     "no-restricted-imports": "off",
+    "no-unused-vars": "warn",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
     "@typescript-eslint/no-restricted-imports": [
       "warn",
       {
