@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -11,14 +11,14 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  };
-
-  // TODO: hook
-  useEffect(() => {
+    console.log('login');
+    // TODO: hook
+    // TODO: toast doesn't work
     if (!email || !password) {
       toast.error('Please fill out all fields');
+      return;
     }
-  });
+  };
 
   return (
     <Wrapper className='full-page'>
