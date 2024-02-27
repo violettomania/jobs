@@ -1,12 +1,21 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 
 const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper className='full-page'>
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <Link to='/'>
           <Logo />
         </Link>
@@ -20,7 +29,8 @@ const Register = () => {
             type='text'
             name='name'
             className='form-input'
-            value=''
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className='form-row'>
@@ -32,7 +42,8 @@ const Register = () => {
             type='email'
             name='email'
             className='form-input'
-            value=''
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className='form-row'>
@@ -44,7 +55,8 @@ const Register = () => {
             type='password'
             name='password'
             className='form-input'
-            value=''
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <button type='submit' className='btn btn-block'>
