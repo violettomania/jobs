@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
@@ -12,6 +13,13 @@ const Register = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
+  // TODO: hook
+  useEffect(() => {
+    if (!name || !email || !password) {
+      toast.error('Please fill out all fields');
+    }
+  });
 
   return (
     <Wrapper className='full-page'>
