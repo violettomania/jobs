@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
@@ -7,7 +9,6 @@ import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
-import getCookie from '../util/getCookie';
 import setCookie from '../util/setCookie';
 
 const Register = () => {
@@ -18,6 +19,13 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector((state: RootState) => state.user.error);
   const user = useAppSelector((state: RootState) => state.user.user);
+  const registered = useAppSelector(
+    (state: RootState) => state.user.registered
+  );
+  const loggedIn = useAppSelector((state: RootState) => state.user.loggedIn);
+  const location = useLocation();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,9 +46,15 @@ const Register = () => {
     if (user && !localStorage.getItem('user')) {
       localStorage.setItem('user', JSON.stringify(user));
       setCookie('token', user.token, 7);
-      console.log(getCookie('token'));
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log('registered', registered && location.pathname !== '/login');
+    if (registered && location.pathname !== '/login') {
+      navigate('/login');
+    }
+  }, [location.pathname, navigate, registered]);
 
   return (
     <Wrapper className='full-page'>
