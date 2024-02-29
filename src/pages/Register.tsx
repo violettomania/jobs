@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
+import { setRegistering } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
 import setCookie from '../util/setCookie';
 
@@ -19,11 +19,9 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector((state: RootState) => state.user.error);
   const user = useAppSelector((state: RootState) => state.user.user);
-  const registered = useAppSelector(
-    (state: RootState) => state.user.registered
+  const registering = useAppSelector(
+    (state: RootState) => state.user.registering
   );
-  const loggedIn = useAppSelector((state: RootState) => state.user.loggedIn);
-  const location = useLocation();
 
   const navigate = useNavigate();
 
@@ -50,11 +48,11 @@ const Register = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log('registered', registered && location.pathname !== '/login');
-    if (registered && location.pathname !== '/login') {
+    if (registering) {
+      dispatch(setRegistering(false));
       navigate('/login');
     }
-  }, [location.pathname, navigate, registered]);
+  }, [dispatch, navigate, registering]);
 
   return (
     <Wrapper className='full-page'>
