@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import customFetch from '../../util/axios';
+import customFetch from '../../util/axiosWrapper';
 
 interface RegistrationErrorResponse {
   response?: {

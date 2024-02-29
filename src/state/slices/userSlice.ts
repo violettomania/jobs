@@ -21,9 +21,9 @@ const initialState: UserState & RedirectState = {
     name: '',
     token: '',
   },
-  redirectToLogin: false,
   loading: false,
   error: '',
+  redirectToLogin: false,
 };
 
 export const userSlice = createSlice({
@@ -37,18 +37,18 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.redirectToLogin = false;
         state.loading = true;
+        state.redirectToLogin = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.redirectToLogin = true;
         state.loading = false;
+        state.redirectToLogin = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.redirectToLogin = false;
         state.error = action.error.message;
+        state.redirectToLogin = false;
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
