@@ -1,20 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { loginUser } from '../state/actions/loginUser';
+import { RootState } from '../state/store/store';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useAppDispatch();
+  const error = useAppSelector((state: RootState) => state.user.error);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email || !password) {
       toast.error('Please fill out all fields');
+    } else {
+      dispatch(loginUser({ email, password }));
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <Wrapper className='full-page'>

@@ -7,6 +7,8 @@ import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
+import getCookie from '../util/getCookie';
+import setCookie from '../util/setCookie';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -15,6 +17,7 @@ const Register = () => {
 
   const dispatch = useAppDispatch();
   const error = useAppSelector((state: RootState) => state.user.error);
+  const user = useAppSelector((state: RootState) => state.user.user);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,6 +33,14 @@ const Register = () => {
       toast.error(error);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (user && !localStorage.getItem('user')) {
+      localStorage.setItem('user', JSON.stringify(user));
+      setCookie('token', user.token, 7);
+      console.log(getCookie('token'));
+    }
+  }, [user]);
 
   return (
     <Wrapper className='full-page'>
