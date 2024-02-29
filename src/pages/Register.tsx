@@ -12,8 +12,6 @@ const Register = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: hook
-    // TODO: toast doesn't work
     if (!name || !email || !password) {
       toast.error('Please fill out all fields');
       return;

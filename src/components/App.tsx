@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
 import Error from '../pages/Error';
 import Landing from '../pages/Landing';
@@ -15,7 +14,6 @@ export default function App() {
         <Route path='register' element={<Register />} />
         <Route path='*' element={<Error />} />
       </Routes>
-      <ToastContainer position='bottom-right' />
     </BrowserRouter>
   );
 }

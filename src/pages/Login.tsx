@@ -11,9 +11,6 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('login');
-    // TODO: hook
-    // TODO: toast doesn't work
     if (!email || !password) {
       toast.error('Please fill out all fields');
       return;
