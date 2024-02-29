@@ -120,3 +120,5 @@ const Register = () => {
 };
 
 export default Register;
+
+// TODO: handle loading state
