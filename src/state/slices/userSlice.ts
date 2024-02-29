@@ -6,11 +6,14 @@ import { registerUser } from '../actions/registerUser';
 interface UserState {
   user: User;
   loading: boolean;
-  registering: boolean;
   error?: string;
 }
 
-const initialState: UserState = {
+interface RedirectState {
+  redirectToLogin: boolean;
+}
+
+const initialState: UserState & RedirectState = {
   user: {
     email: '',
     lastName: '',
@@ -18,7 +21,7 @@ const initialState: UserState = {
     name: '',
     token: '',
   },
-  registering: false,
+  redirectToLogin: false,
   loading: false,
   error: '',
 };
@@ -27,24 +30,24 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setRegistering: (state, action) => {
-      state.registering = action.payload;
+    redirect: (state, action) => {
+      state.redirectToLogin = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.registering = false;
+        state.redirectToLogin = false;
         state.loading = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.registering = true;
+        state.redirectToLogin = true;
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.registering = false;
+        state.redirectToLogin = false;
         state.error = action.error.message;
       })
       .addCase(loginUser.pending, (state) => {
@@ -61,6 +64,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setRegistering } = userSlice.actions;
+export const { redirect } = userSlice.actions;
 
 export default userSlice.reducer;

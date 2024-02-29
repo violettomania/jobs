@@ -7,7 +7,7 @@ import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
-import { setRegistering } from '../state/slices/userSlice';
+import { redirect } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
 import setCookie from '../util/setCookie';
 
@@ -19,8 +19,8 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector((state: RootState) => state.user.error);
   const user = useAppSelector((state: RootState) => state.user.user);
-  const registering = useAppSelector(
-    (state: RootState) => state.user.registering
+  const redirectToLogin = useAppSelector(
+    (state: RootState) => state.user.redirectToLogin
   );
 
   const navigate = useNavigate();
@@ -48,11 +48,11 @@ const Register = () => {
   }, [user]);
 
   useEffect(() => {
-    if (registering) {
-      dispatch(setRegistering(false));
+    if (redirectToLogin) {
+      dispatch(redirect(false));
       navigate('/login');
     }
-  }, [dispatch, navigate, registering]);
+  }, [dispatch, navigate, redirectToLogin]);
 
   return (
     <Wrapper className='full-page'>
