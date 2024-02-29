@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import customFetch from '../../util/axios';
 
 interface RegistrationErrorResponse {
   response?: {
@@ -19,8 +20,8 @@ export const registerUser = createAsyncThunk(
     try {
       const {
         data: { user: userData },
-      }: { data: RegistrationSuccessResponse } = await axios.post(
-        'https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/register',
+      }: { data: RegistrationSuccessResponse } = await customFetch.post(
+        '/auth/register',
         user
       );
       return userData;
