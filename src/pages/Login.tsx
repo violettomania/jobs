@@ -13,7 +13,6 @@ const Login = () => {
     e.preventDefault();
     if (!email || !password) {
       toast.error('Please fill out all fields');
-      return;
     }
   };
 
