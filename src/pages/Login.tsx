@@ -29,14 +29,6 @@ const Login = () => {
     }
   };
 
-  // TODO if the user refreshes the page, the user is reset to null, so I can't login
-  // user should be able to login with different credentials
-  // potential solution: store user in local storage and check for it on page load
-  // case: user doesn't refresh login page: login goes normally
-  // case: user doesn't refresh login page, tries to login with different credentials
-  // case: user refreshes login page, tries to login with recently registered user
-  // case: user refreshes login page, tries to login with different credentials
-  // maybe we need to query the user from the server on page load
   const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (user) {
