@@ -17,8 +17,10 @@ const Register = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
-  const error = useAppSelector((state: RootState) => state.user.error);
+
+  const loading = useAppSelector((state: RootState) => state.user.loading);
   const user = useAppSelector((state: RootState) => state.user.user);
+  const error = useAppSelector((state: RootState) => state.user.error);
   const redirectToLogin = useAppSelector(
     (state: RootState) => state.user.redirectToLogin
   );
@@ -100,11 +102,15 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type='submit' className='btn btn-block'>
-          submit
+        <button type='submit' className='btn btn-block' disabled={loading}>
+          {loading ? 'loading...' : 'submit'}
         </button>
-        <button type='button' className='btn btn-block btn-hipster'>
-          demo app
+        <button
+          type='button'
+          className='btn btn-block btn-hipster'
+          disabled={loading}
+        >
+          {loading ? 'loading...' : 'demo app'}
         </button>
         <p>
           Already a member?{' '}
@@ -118,5 +124,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// TODO: handle loading state

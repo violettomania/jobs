@@ -13,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useAppDispatch();
+
+  const loading = useAppSelector((state: RootState) => state.user.loading);
   const error = useAppSelector((state: RootState) => state.user.error);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,11 +65,15 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type='submit' className='btn btn-block'>
-          submit
+        <button type='submit' className='btn btn-block' disabled={loading}>
+          {loading ? 'loading...' : 'submit'}
         </button>
-        <button type='button' className='btn btn-block btn-hipster'>
-          demo app
+        <button
+          type='button'
+          className='btn btn-block btn-hipster'
+          disabled={loading}
+        >
+          {loading ? 'loading...' : 'demo app'}
         </button>
         <p>
           Not a member yet?{' '}
@@ -81,5 +87,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// TODO: handle loading state
