@@ -4,7 +4,7 @@ import { loginUser } from '../actions/loginUser';
 import { registerUser } from '../actions/registerUser';
 
 interface UserState {
-  user: User;
+  user: User | null;
   loading: boolean;
   error?: string;
 }
@@ -14,13 +14,7 @@ interface RedirectState {
 }
 
 const initialState: UserState & RedirectState = {
-  user: {
-    email: '',
-    lastName: '',
-    location: '',
-    name: '',
-    token: '',
-  },
+  user: null,
   loading: false,
   error: '',
   redirectToLogin: false,

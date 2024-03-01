@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
 import { redirect } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
-import setCookie from '../util/setCookie';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -19,7 +18,6 @@ const Register = () => {
   const dispatch = useAppDispatch();
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
-  const user = useAppSelector((state: RootState) => state.user.user);
   const error = useAppSelector((state: RootState) => state.user.error);
   const redirectToLogin = useAppSelector(
     (state: RootState) => state.user.redirectToLogin
@@ -41,13 +39,6 @@ const Register = () => {
       toast.error(error);
     }
   }, [error]);
-
-  useEffect(() => {
-    if (user && !localStorage.getItem('user')) {
-      localStorage.setItem('user', JSON.stringify(user));
-      setCookie('token', user.token, 7);
-    }
-  }, [user]);
 
   useEffect(() => {
     if (redirectToLogin) {

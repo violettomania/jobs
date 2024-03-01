@@ -7,6 +7,7 @@ import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
+import setCookie from '../util/setCookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ const Login = () => {
 
   const dispatch = useAppDispatch();
 
+  const user = useAppSelector((state: RootState) => state.user.user);
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const error = useAppSelector((state: RootState) => state.user.error);
 
@@ -23,19 +25,30 @@ const Login = () => {
     if (!email || !password) {
       toast.error('Please fill out all fields');
     } else {
-      dispatch(loginUser({ email, password }));
+      if (user) dispatch(loginUser({ email, password, token: user.token }));
     }
   };
 
+  // TODO if the user refreshes the page, the user is reset to null, so I can't login
+  // user should be able to login with different credentials
+  // potential solution: store user in local storage and check for it on page load
+  // case: user doesn't refresh login page: login goes normally
+  // case: user doesn't refresh login page, tries to login with different credentials
+  // case: user refreshes login page, tries to login with recently registered user
+  // case: user refreshes login page, tries to login with different credentials
+  // maybe we need to query the user from the server on page load
   const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(
-      loginUser({
-        email: 'testUser@test.com',
-        password: 'secret',
-        isDemo: true,
-      })
-    );
+    if (user) {
+      dispatch(
+        loginUser({
+          email: 'testUser@test.com',
+          password: 'secret',
+          isDemo: true,
+          token: user.token,
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -43,6 +56,15 @@ const Login = () => {
       toast.error(error);
     }
   }, [error]);
+
+  useEffect(() => {
+    console.log('trying to reset user');
+    if (user) {
+      console.log('reset user', user);
+      localStorage.setItem('user', JSON.stringify(user));
+      setCookie('token', user.token, 7);
+    }
+  }, [user]);
 
   return (
     <Wrapper className='full-page'>

@@ -17,9 +17,13 @@ interface LoginSuccessResponse {
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async (user: { email: string; password: string; isDemo?: boolean }) => {
+  async (user: {
+    email: string;
+    password: string;
+    token: string;
+    isDemo?: boolean;
+  }) => {
     try {
-      const token = getCookie('token');
       const {
         data: { user: userData },
       }: { data: LoginSuccessResponse } = await customFetch.post(
@@ -27,7 +31,7 @@ export const loginUser = createAsyncThunk(
         user,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
