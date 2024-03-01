@@ -29,7 +29,6 @@ const Login = () => {
   };
 
   const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
     dispatch(
       loginUser({
         email: 'testUser@test.com',
