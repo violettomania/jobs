@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import useUserStorage from '../hooks/useLocalStorage';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
-import setCookie from '../util/setCookie';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +20,6 @@ const Login = () => {
   const error = useAppSelector((state: RootState) => state.user.error);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e);
     e.preventDefault();
     if (!email || !password) {
       toast.error('Please fill out all fields');
@@ -31,32 +30,23 @@ const Login = () => {
 
   const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (user) {
-      dispatch(
-        loginUser({
-          email: 'testUser@test.com',
-          password: 'secret',
-          isDemo: true,
-          token: user.token,
-        })
-      );
-    }
+    dispatch(
+      loginUser({
+        email: 'testUser@test.com',
+        password: 'secret',
+        isDemo: true,
+        token: user && user.token ? user.token : '',
+      })
+    );
   };
+
+  useUserStorage();
 
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
   }, [error]);
-
-  useEffect(() => {
-    console.log('trying to reset user');
-    if (user) {
-      console.log('reset user', user);
-      localStorage.setItem('user', JSON.stringify(user));
-      setCookie('token', user.token, 7);
-    }
-  }, [user]);
 
   return (
     <Wrapper className='full-page'>
