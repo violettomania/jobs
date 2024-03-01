@@ -18,12 +18,24 @@ const Login = () => {
   const error = useAppSelector((state: RootState) => state.user.error);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    console.log(e);
     e.preventDefault();
     if (!email || !password) {
       toast.error('Please fill out all fields');
     } else {
       dispatch(loginUser({ email, password }));
     }
+  };
+
+  const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    dispatch(
+      loginUser({
+        email: 'testUser@test.com',
+        password: 'secret',
+        isDemo: true,
+      })
+    );
   };
 
   useEffect(() => {
@@ -71,6 +83,7 @@ const Login = () => {
         <button
           type='button'
           className='btn btn-block btn-hipster'
+          onClick={handleDemoUserLogin}
           disabled={loading}
         >
           {loading ? 'loading...' : 'demo app'}

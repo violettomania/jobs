@@ -17,7 +17,7 @@ interface LoginSuccessResponse {
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async (user: { email: string; password: string }) => {
+  async (user: { email: string; password: string; isDemo?: boolean }) => {
     try {
       const token = getCookie('token');
       const {
@@ -31,6 +31,9 @@ export const loginUser = createAsyncThunk(
           },
         }
       );
+      if (user.isDemo) {
+        userData.isDemo = true;
+      }
       return userData;
     } catch (error: unknown) {
       const err = error as LoginErrorResponse;

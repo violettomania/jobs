@@ -4,4 +4,5 @@ interface User {
   location: string;
   name: string;
   token: string;
+  isDemo?: boolean;
 }
