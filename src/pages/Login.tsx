@@ -47,10 +47,11 @@ const Login = () => {
     }
   }, [error]);
 
+  // TODO: Redirect to home page if user is logged in
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>
-        <Link to='/'>
+        <Link to='/landing'>
           <Logo />
         </Link>
         <h3>Login</h3>

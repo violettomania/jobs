@@ -1,6 +1,4 @@
 import { FaTimes } from 'react-icons/fa';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/SmallSidebar';
 

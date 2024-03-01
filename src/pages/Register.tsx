@@ -50,7 +50,7 @@ const Register = () => {
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>
-        <Link to='/'>
+        <Link to='/landing'>
           <Logo />
         </Link>
         <h3>Register</h3>
