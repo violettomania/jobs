@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
@@ -13,8 +13,10 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const loggedIn = useAppSelector((state: RootState) => state.user.loggedIn);
   const user = useAppSelector((state: RootState) => state.user.user);
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const error = useAppSelector((state: RootState) => state.user.error);
@@ -47,7 +49,12 @@ const Login = () => {
     }
   }, [error]);
 
-  // TODO: Redirect to home page if user is logged in
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/');
+    }
+  }, [loggedIn, navigate]);
+
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>

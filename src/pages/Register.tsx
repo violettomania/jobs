@@ -19,8 +19,8 @@ const Register = () => {
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const error = useAppSelector((state: RootState) => state.user.error);
-  const redirectToLogin = useAppSelector(
-    (state: RootState) => state.user.redirectToLogin
+  const registerPending = useAppSelector(
+    (state: RootState) => state.user.registerPending
   );
 
   const navigate = useNavigate();
@@ -41,11 +41,11 @@ const Register = () => {
   }, [error]);
 
   useEffect(() => {
-    if (redirectToLogin) {
+    if (registerPending) {
       dispatch(redirect(false));
       navigate('/login');
     }
-  }, [dispatch, navigate, redirectToLogin]);
+  }, [registerPending, navigate, dispatch]);
 
   return (
     <Wrapper className='full-page'>

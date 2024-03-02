@@ -9,15 +9,20 @@ interface UserState {
   error?: string;
 }
 
-interface RedirectState {
-  redirectToLogin: boolean;
+interface RegisterState {
+  registerPending: boolean;
 }
 
-const initialState: UserState & RedirectState = {
+interface LoginState {
+  loggedIn: boolean;
+}
+
+const initialState: UserState & RegisterState & LoginState = {
   user: null,
   loading: false,
   error: '',
-  redirectToLogin: false,
+  registerPending: false,
+  loggedIn: false,
 };
 
 export const userSlice = createSlice({
@@ -25,35 +30,41 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     redirect: (state, action) => {
-      state.redirectToLogin = action.payload;
+      state.registerPending = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
-        state.redirectToLogin = false;
+        state.registerPending = false;
+        state.loggedIn = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loading = false;
-        state.redirectToLogin = true;
+        state.registerPending = true;
+        state.loggedIn = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-        state.redirectToLogin = false;
+        state.registerPending = false;
+        state.loggedIn = false;
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
+        state.loggedIn = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.loading = false;
+        state.loggedIn = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        state.loggedIn = false;
       });
   },
 });
