@@ -16,13 +16,16 @@ const SharedLayout = () => {
 
   const handleBigSidebarToggle = () => {
     setBigSidebarOpen(!bigSidebarOpen);
+    setSmallSidebarOpen(!smallSidebarOpen);
   };
 
   return (
     <>
       <Wrapper>
         <main className='dashboard'>
-          {smallSidebarOpen && <SmallSidebar />}
+          {smallSidebarOpen && (
+            <SmallSidebar onSidebarToggle={handleSmallSidebarToggle} />
+          )}
           <BigSidebar showSidebar={bigSidebarOpen} />
           <div>
             <Navbar onSidebarToggle={handleBigSidebarToggle} />
