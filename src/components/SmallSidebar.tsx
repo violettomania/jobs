@@ -4,16 +4,12 @@ import Wrapper from '../assets/wrappers/SmallSidebar';
 
 import Logo from './Logo';
 
-interface SmallSidebarProps {
-  onSidebarToggle: () => void;
-}
-
-export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
+export const SmallSidebar = () => {
   return (
     <Wrapper>
       <div className='sidebar-container show-sidebar'>
         <div className='content'>
-          <button className='close-btn' onClick={onSidebarToggle}>
+          <button className='close-btn'>
             <FaTimes />
           </button>
           <header>

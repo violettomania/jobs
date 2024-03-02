@@ -7,22 +7,25 @@ import Navbar from '../../components/Navbar';
 import SmallSidebar from '../../components/SmallSidebar';
 
 const SharedLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
+  const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
+  const handleSmallSidebarToggle = () => {
+    setSmallSidebarOpen(!smallSidebarOpen);
+  };
+
+  const handleBigSidebarToggle = () => {
+    setBigSidebarOpen(!bigSidebarOpen);
   };
 
   return (
     <>
       <Wrapper>
         <main className='dashboard'>
-          {sidebarOpen && (
-            <SmallSidebar onSidebarToggle={handleSidebarToggle} />
-          )}
-          <BigSidebar />
+          {smallSidebarOpen && <SmallSidebar />}
+          <BigSidebar showSidebar={bigSidebarOpen} />
           <div>
-            <Navbar />
+            <Navbar onSidebarToggle={handleBigSidebarToggle} />
             <div className='dashboard-page'>
               <Outlet />
             </div>

@@ -1,35 +1,25 @@
 import Wrapper from '../assets/wrappers/BigSidebar';
 import Logo from '../components/Logo';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { toggleSidebar } from '../state/slices/sidebarSlice';
-import { RootState } from '../state/store/store';
 
 import NavLinks from './NavLinks';
 
-const BigSidebar = () => {
-  const dispatch = useAppDispatch();
-  const isSidebarOpen = useAppSelector(
-    (state: RootState) => state.sidebar.isSidebarOpen
-  );
+interface BigSidebarProps {
+  showSidebar: boolean;
+}
 
-  const handleToggle = () => {
-    dispatch(toggleSidebar());
-  };
-
+const BigSidebar = ({ showSidebar }: BigSidebarProps) => {
   return (
     <Wrapper>
       <div
         className={
-          isSidebarOpen
-            ? 'sidebar-container '
-            : 'sidebar-container show-sidebar'
+          showSidebar ? 'sidebar-container show-sidebar' : 'sidebar-container '
         }
       >
         <div className='content'>
           <header>
             <Logo />
           </header>
-          <NavLinks toggleSidebar={handleToggle} />
+          <NavLinks />
         </div>
       </div>
     </Wrapper>

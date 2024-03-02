@@ -7,7 +7,11 @@ import { RootState } from '../state/store/store';
 
 import Logo from './Logo';
 
-const Navbar = () => {
+interface NavbarProps {
+  onSidebarToggle: () => void;
+}
+
+const Navbar = ({ onSidebarToggle }: NavbarProps) => {
   const [showLogout, setShowLogout] = useState(false);
 
   const user = useAppSelector((state: RootState) => state.user.user);
@@ -15,7 +19,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <div className='nav-center'>
-        <button type='button' className='toggle-btn'>
+        <button type='button' className='toggle-btn' onClick={onSidebarToggle}>
           <FaAlignLeft />
         </button>
         <div>
