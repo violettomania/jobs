@@ -7,7 +7,7 @@ import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
-import { redirect } from '../state/slices/userSlice';
+import { setRegisterPending } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
 
 const Register = () => {
@@ -42,7 +42,7 @@ const Register = () => {
 
   useEffect(() => {
     if (registerPending) {
-      dispatch(redirect(false));
+      dispatch(setRegisterPending(false));
       navigate('/login');
     }
   }, [registerPending, navigate, dispatch]);

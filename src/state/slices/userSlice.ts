@@ -29,7 +29,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    redirect: (state, action) => {
+    setRegisterPending: (state, action) => {
       state.registerPending = action.payload;
     },
   },
@@ -69,6 +69,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { redirect } = userSlice.actions;
+export const { setRegisterPending } = userSlice.actions;
 
 export default userSlice.reducer;
