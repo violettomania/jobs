@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Wrapper from '../../assets/wrappers/SharedLayout';
 import BigSidebar from '../../components/BigSidebar';
 import Navbar from '../../components/Navbar';
 import SmallSidebar from '../../components/SmallSidebar';
+import { useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { RootState } from '../../state/store/store';
 
 const SharedLayout = () => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
+
+  const user = useAppSelector((state: RootState) => state.user.user);
 
   const handleSmallSidebarToggle = () => {
     setSmallSidebarOpen(!smallSidebarOpen);
@@ -18,6 +22,9 @@ const SharedLayout = () => {
     setBigSidebarOpen(!bigSidebarOpen);
     setSmallSidebarOpen(!smallSidebarOpen);
   };
+
+  // if !user: get user from local storage, fire resetUser action
+  useEffect(() => {}, []);
 
   return (
     <>
