@@ -30,7 +30,7 @@ const Login = () => {
     }
   };
 
-  const handleDemoUserLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDemoUserLogin = () => {
     dispatch(
       loginUser({
         email: 'testUser@test.com',

@@ -32,6 +32,10 @@ export const userSlice = createSlice({
     setRegisterPending: (state, action) => {
       state.registerPending = action.payload;
     },
+    logout: (state) => {
+      state.user = null;
+      state.loggedIn = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -69,6 +73,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setRegisterPending } = userSlice.actions;
+export const { setRegisterPending, logout } = userSlice.actions;
 
 export default userSlice.reducer;

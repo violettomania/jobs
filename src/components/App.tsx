@@ -23,3 +23,5 @@ export default function App() {
     </Provider>
   );
 }
+
+// TODO: user resets to null on page refresh: add setUser to userSlice, if user is null, get it from localStorage and fire the event
