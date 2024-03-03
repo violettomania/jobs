@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
+import Profile from '../pages/dashboard/Profile';
 import SharedLayout from '../pages/dashboard/SharedLayout';
 import Error from '../pages/Error';
 import Landing from '../pages/Landing';
@@ -14,6 +15,7 @@ export default function App() {
       <Route path='/' element={<Landing />} />
       <Route path='/dashboard' element={<SharedLayout />}>
         <Route index element={<JobStats />} />
+        <Route path='profile' element={<Profile />} />
       </Route>
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />

@@ -37,6 +37,7 @@ const Profile = () => {
     setUserData({ ...userData, [name]: value });
   };
 
+  // TODO: fields are still editable when user is a demo user
   return (
     <Wrapper>
       <form className='form' onSubmit={handleSubmit}>
