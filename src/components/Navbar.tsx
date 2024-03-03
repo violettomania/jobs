@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/Navbar';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
@@ -36,8 +36,10 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
           <FaAlignLeft />
         </button>
         <div>
-          <Logo />
-          <h3 className='logo-text'>dashboard</h3>
+          <Link to='/dashboard'>
+            <Logo />
+            <h3 className='logo-text'>dashboard</h3>
+          </Link>
         </div>
         <div className='btn-container'>
           <button
