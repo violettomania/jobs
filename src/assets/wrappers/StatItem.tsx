@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface WrapperProps {
   color?: string;
-  bcg?: string;
+  $bcg?: string; // Changed to transient prop
 }
 
 const Wrapper = styled.article<WrapperProps>`
@@ -31,7 +31,7 @@ const Wrapper = styled.article<WrapperProps>`
   .icon {
     width: 70px;
     height: 60px;
-    background: ${(props) => props.bcg};
+    background: ${(props) => props.$bcg}; // Changed to transient prop
     border-radius: var(--borderRadius);
     display: flex;
     align-items: center;

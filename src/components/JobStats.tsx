@@ -5,6 +5,7 @@ import { fetchJobStats } from '../state/actions/fetchJobStats';
 import { RootState } from '../state/store/store';
 
 import JobStatsContainer from './JobStatsContainer';
+import LoadingSpinner from './LoadingSpinner';
 
 const JobStats = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +18,16 @@ const JobStats = () => {
 
   return (
     <>
-      <JobStatsContainer jobStats={jobStats} />
-      {jobStats.monthlyApplications.length > 0 && null}
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <JobStatsContainer jobStats={jobStats} />
+          {jobStats.monthlyApplications.length > 0 && null}
+        </>
+      )}
+      {/* <JobStatsContainer jobStats={jobStats} />
+      {jobStats.monthlyApplications.length > 0 && null} */}
     </>
   );
 };
