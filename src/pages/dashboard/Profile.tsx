@@ -31,7 +31,7 @@ const Profile = () => {
     }
   };
 
-  // TODO: handle user update: rewrite localStorage
+  // TODO: handle user update: rewrite localStorage, error message
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user?.isDemo) return;
