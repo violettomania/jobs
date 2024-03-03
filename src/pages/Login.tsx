@@ -44,6 +44,7 @@ const Login = () => {
 
   useUserStorage();
 
+  // TODO: there's no error for not registered user
   useEffect(() => {
     if (error) {
       toast.error(error);
