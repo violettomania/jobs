@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
@@ -9,22 +9,22 @@ import { resetUser } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
 
 const Landing = () => {
-  const user = useAppSelector((state: RootState) => state.user.user);
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
 
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   // prevent logout on page refresh
   useEffect(() => {
-    if (!user) {
+    if (!userLoggedIn) {
       const userString = localStorage.getItem('user');
       if (userString) {
         const userObj = JSON.parse(userString);
         dispatch(resetUser(userObj));
-        navigate('/');
       }
     }
-  }, [dispatch, navigate, user]);
+  }, [dispatch, userLoggedIn]);
 
   return (
     <Wrapper>
