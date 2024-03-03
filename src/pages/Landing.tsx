@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
@@ -22,7 +21,6 @@ const Landing = () => {
       if (userString) {
         const userObj = JSON.parse(userString);
         dispatch(resetUser(userObj));
-        toast.success('User already logged in!');
         navigate('/');
       }
     }
