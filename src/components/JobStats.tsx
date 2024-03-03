@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchJobStats } from '../state/actions/fetchJobStats';
@@ -12,10 +13,19 @@ const JobStats = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state: RootState) => state.jobs.loading);
   const jobStats = useAppSelector((state: RootState) => state.jobs.jobStats);
+  const error = useAppSelector((state: RootState) => state.jobs.error);
 
   useEffect(() => {
     dispatch(fetchJobStats());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(
+        'An error happened while fetching job stats. Please try again.'
+      );
+    }
+  }, [error]);
 
   return (
     <>
