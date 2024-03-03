@@ -5,7 +5,8 @@ import Wrapper from '../../assets/wrappers/SharedLayout';
 import BigSidebar from '../../components/BigSidebar';
 import Navbar from '../../components/Navbar';
 import SmallSidebar from '../../components/SmallSidebar';
-import { useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { resetUser } from '../../state/slices/userSlice';
 import { RootState } from '../../state/store/store';
 
 const SharedLayout = () => {
@@ -13,6 +14,8 @@ const SharedLayout = () => {
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
   const user = useAppSelector((state: RootState) => state.user.user);
+
+  const dispatch = useAppDispatch();
 
   const handleSmallSidebarToggle = () => {
     setSmallSidebarOpen(!smallSidebarOpen);
@@ -23,8 +26,15 @@ const SharedLayout = () => {
     setSmallSidebarOpen(!smallSidebarOpen);
   };
 
-  // if !user: get user from local storage, fire resetUser action
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!user) {
+      const userString = localStorage.getItem('user');
+      if (userString) {
+        const userObj = JSON.parse(userString);
+        dispatch(resetUser(userObj));
+      }
+    }
+  }, [dispatch, user]);
 
   return (
     <>
