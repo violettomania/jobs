@@ -360,3 +360,8 @@ ul {
     transform: scale(1);
   }
 }
+
+.form-input:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}

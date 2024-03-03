@@ -13,7 +13,7 @@ const FormRow = ({
   value,
   handleChange,
   labelText,
-  disabled: loading,
+  disabled,
 }: FormRowProps) => {
   return (
     <div className='form-row'>
@@ -26,7 +26,7 @@ const FormRow = ({
         name={name}
         value={value}
         onChange={handleChange}
-        disabled={loading}
+        disabled={disabled}
         className='form-input'
       />
     </div>

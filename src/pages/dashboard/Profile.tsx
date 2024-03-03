@@ -37,7 +37,6 @@ const Profile = () => {
     setUserData({ ...userData, [name]: value });
   };
 
-  // TODO: fields are still editable when user is a demo user
   return (
     <Wrapper>
       <form className='form' onSubmit={handleSubmit}>
@@ -72,7 +71,7 @@ const Profile = () => {
             handleChange={handleChange}
             disabled={loading || user?.isDemo}
           />
-          {user?.isDemo && (
+          {user?.isDemo || (
             <button type='submit' className='btn btn-block' disabled={loading}>
               {loading ? 'Please Wait...' : 'save changes'}
             </button>
