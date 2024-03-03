@@ -8,7 +8,7 @@ interface StatItemProps {
   bcg: string;
 }
 
-const StatItem = ({ count, title, icon, color, bcg }: StatItemProps) => {
+const JobStatItem = ({ count, title, icon, color, bcg }: StatItemProps) => {
   return (
     <Wrapper color={color} bcg={bcg}>
       <header>
@@ -20,4 +20,4 @@ const StatItem = ({ count, title, icon, color, bcg }: StatItemProps) => {
   );
 };
 
-export default StatItem;
+export default JobStatItem;

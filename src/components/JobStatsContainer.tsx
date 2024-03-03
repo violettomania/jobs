@@ -1,31 +1,32 @@
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 
 import Wrapper from '../assets/wrappers/StatsContainer';
 
-import StatItem from './StatItem';
+import JobStatItem from './StatItem';
 
-const StatsContainer = () => {
-  //   const { stats } = useSelector((store) => store.allJobs);
+interface JobStatsContainerProps {
+  jobStats: JobStats;
+}
 
+const JobStatsContainer = ({ jobStats }: JobStatsContainerProps) => {
   const defaultStats = [
     {
       title: 'pending applications',
-      //       count: stats.pending || 0,
+      count: jobStats.defaultStats.pending || 0,
       icon: <FaSuitcaseRolling />,
       color: '#e9b949',
       bcg: '#fcefc7',
     },
     {
       title: 'interviews scheduled',
-      //       count: stats.interview || 0,
+      count: jobStats.defaultStats.interview || 0,
       icon: <FaCalendarCheck />,
       color: '#647acb',
       bcg: '#e0e8f9',
     },
     {
       title: 'jobs declined',
-      //       count: stats.declined || 0,
+      count: jobStats.defaultStats.declined || 0,
       icon: <FaBug />,
       color: '#d66a6a',
       bcg: '#ffeeee',
@@ -34,11 +35,11 @@ const StatsContainer = () => {
 
   return (
     <Wrapper>
-      {/* {defaultStats.map((item, index) => {
-        return <StatItem key={index} {...item} />;
-      })} */}
+      {defaultStats.map((item, index) => {
+        return <JobStatItem key={index} {...item} />;
+      })}
     </Wrapper>
   );
 };
 
-export default StatsContainer;
+export default JobStatsContainer;

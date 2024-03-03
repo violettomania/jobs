@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../util/axiosWrapper';
-import getCookie from '../../util/getCookie';
 
 interface LoginErrorResponse {
   response?: {
