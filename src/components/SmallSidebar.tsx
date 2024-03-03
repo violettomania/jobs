@@ -3,6 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 import Wrapper from '../assets/wrappers/SmallSidebar';
 
 import Logo from './Logo';
+import NavLinks from './NavLinks';
 
 interface SmallSidebarProps {
   onSidebarToggle: () => void;
@@ -19,7 +20,7 @@ export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
           <header>
             <Logo />
           </header>
-          <div className='nav-links'>nav links</div>
+          <NavLinks />
         </div>
       </div>
     </Wrapper>
