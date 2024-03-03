@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 import FormRow from '../../components/FormRow';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { updateUser } from '../../state/actions/updateUser';
 import { RootState } from '../../state/store/store';
 
 const Profile = () => {
@@ -26,9 +27,11 @@ const Profile = () => {
     if (!name || !email || !lastName || !location) {
       toast.error('please fill out all fields');
     } else {
-      //dispatch(updateUser(userData));
+      dispatch(updateUser(userData));
     }
   };
+
+  // TODO: handle user update: rewrite localStorage
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (user?.isDemo) return;

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { loginUser } from '../actions/loginUser';
 import { registerUser } from '../actions/registerUser';
+import { updateUser } from '../actions/updateUser';
 
 interface UserState {
   user: User | null;
@@ -75,6 +76,17 @@ export const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
         state.loggedIn = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });

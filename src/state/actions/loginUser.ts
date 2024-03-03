@@ -26,7 +26,7 @@ export const loginUser = createAsyncThunk(
       const {
         data: { user: userData },
       }: { data: LoginSuccessResponse } = await customFetch.post(
-        '/auth/login',
+        'auth/login',
         user,
         {
           headers: {
