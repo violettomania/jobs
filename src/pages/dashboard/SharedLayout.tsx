@@ -11,7 +11,7 @@ const SharedLayout = () => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
-  useRehydrateOnPageRefresh('/');
+  useRehydrateOnPageRefresh('/dashboard');
 
   const handleSmallSidebarToggle = () => {
     setSmallSidebarOpen(!smallSidebarOpen);

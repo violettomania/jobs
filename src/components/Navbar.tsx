@@ -26,7 +26,7 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
     dispatch(logout());
     localStorage.clear();
     clearCookie('token');
-    navigate('/landing');
+    navigate('/');
   };
 
   return (
