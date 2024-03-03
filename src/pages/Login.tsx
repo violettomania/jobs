@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
+import FormRow from '../components/FormRow';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import useUserStorage from '../hooks/useLocalStorage';
 import { loginUser } from '../state/actions/loginUser';
@@ -62,32 +63,20 @@ const Login = () => {
           <Logo />
         </Link>
         <h3>Login</h3>
-        <div className='form-row'>
-          <label htmlFor='email' className='form-label'>
-            email
-          </label>
-          <input
-            id='email'
-            type='email'
-            name='email'
-            className='form-input'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className='form-row'>
-          <label htmlFor='password' className='form-label'>
-            password
-          </label>
-          <input
-            id='password'
-            type='password'
-            name='password'
-            className='form-input'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <FormRow
+          type='email'
+          name='email'
+          value={email}
+          handleChange={(e) => setEmail(e.target.value)}
+          disabled={loading}
+        />
+        <FormRow
+          type='password'
+          name='password'
+          value={password}
+          handleChange={(e) => setPassword(e.target.value)}
+          disabled={loading}
+        />
         <button type='submit' className='btn btn-block' disabled={loading}>
           {loading ? 'loading...' : 'submit'}
         </button>
