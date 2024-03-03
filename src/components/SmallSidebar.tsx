@@ -9,7 +9,6 @@ interface SmallSidebarProps {
   onSidebarToggle: () => void;
 }
 
-// TODO: doesn't close when choosing a link
 export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
   return (
     <Wrapper>
@@ -21,7 +20,7 @@ export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
           <header>
             <Logo />
           </header>
-          <NavLinks />
+          <NavLinks onSidebarToggle={onSidebarToggle} />
         </div>
       </div>
     </Wrapper>
