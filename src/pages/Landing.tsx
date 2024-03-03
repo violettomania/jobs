@@ -1,30 +1,12 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
 import { Logo } from '../components';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { resetUser } from '../state/slices/userSlice';
-import { RootState } from '../state/store/store';
+import { useRehydrateOnPageRefresh } from '../hooks/useRehydrateOnPageRefresh';
 
 const Landing = () => {
-  const userLoggedIn = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
-
-  const dispatch = useAppDispatch();
-
-  // prevent logout on page refresh
-  useEffect(() => {
-    if (!userLoggedIn) {
-      const userString = localStorage.getItem('user');
-      if (userString) {
-        const userObj = JSON.parse(userString);
-        dispatch(resetUser(userObj));
-      }
-    }
-  }, [dispatch, userLoggedIn]);
+  useRehydrateOnPageRefresh();
 
   return (
     <Wrapper>

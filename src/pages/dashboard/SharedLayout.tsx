@@ -1,36 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import Wrapper from '../../assets/wrappers/SharedLayout';
 import BigSidebar from '../../components/BigSidebar';
 import Navbar from '../../components/Navbar';
 import SmallSidebar from '../../components/SmallSidebar';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
-import { resetUser } from '../../state/slices/userSlice';
-import { RootState } from '../../state/store/store';
+import { useRehydrateOnPageRefresh } from '../../hooks/useRehydrateOnPageRefresh';
 
 const SharedLayout = () => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
-  const userLoggedIn = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
-
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  // prevent logout on page refresh
-  useEffect(() => {
-    if (!userLoggedIn) {
-      const userString = localStorage.getItem('user');
-      if (userString) {
-        const userObj = JSON.parse(userString);
-        dispatch(resetUser(userObj));
-        navigate('/');
-      }
-    }
-  }, [dispatch, navigate, userLoggedIn]);
+  useRehydrateOnPageRefresh('/');
 
   const handleSmallSidebarToggle = () => {
     setSmallSidebarOpen(!smallSidebarOpen);
