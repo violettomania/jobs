@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/Navbar';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { useAppDispatch } from '../hooks/reduxHooksWrapper';
 import { logout } from '../state/slices/userSlice';
-import { RootState } from '../state/store/store';
 
 import Logo from './Logo';
 
 interface NavbarProps {
   onSidebarToggle: () => void;
+  userName: string;
 }
 
-const Navbar = ({ onSidebarToggle }: NavbarProps) => {
+const Navbar = ({ onSidebarToggle, userName }: NavbarProps) => {
   const [showLogout, setShowLogout] = useState(false);
-
-  const user = useAppSelector((state: RootState) => state.user.user);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -25,12 +23,6 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
     dispatch(logout());
     navigate('/landing');
   };
-
-  useEffect(() => {
-    if (user) {
-      console.log('user in navbar', user);
-    }
-  }, [user]);
 
   return (
     <Wrapper>
@@ -51,7 +43,7 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
             onClick={() => setShowLogout(!showLogout)}
           >
             <FaUserCircle />
-            {user?.name}
+            {userName}
             <FaCaretDown />
           </button>
           <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>

@@ -40,7 +40,10 @@ const SharedLayout = () => {
           )}
           <BigSidebar showSidebar={bigSidebarOpen} />
           <div>
-            <Navbar onSidebarToggle={handleBigSidebarToggle} />
+            <Navbar
+              onSidebarToggle={handleBigSidebarToggle}
+              userName={user ? user.name : ''}
+            />
             <div className='dashboard-page'>
               <Outlet />
             </div>
