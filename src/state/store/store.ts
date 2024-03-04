@@ -43,7 +43,7 @@ const SetTransform = createTransform(
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'jobs'],
+  whitelist: ['user', 'jobStats'],
   transforms: [SetTransform],
 };
 
