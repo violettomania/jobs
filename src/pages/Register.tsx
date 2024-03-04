@@ -44,6 +44,7 @@ const Register = () => {
   useEffect(() => {
     if (registerPending) {
       dispatch(setRegisterPending(false));
+      toast.success('registration successful');
       navigate('/login');
     }
   }, [registerPending, navigate, dispatch]);
