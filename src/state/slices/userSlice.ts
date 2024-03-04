@@ -90,7 +90,8 @@ export const userSlice = createSlice({
         state.updated = false;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        // TODO: updating user does not change userName in Navbar
+        state.user = { ...state.user, ...action.payload };
         state.loading = false;
         state.updated = true;
       })
