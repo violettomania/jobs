@@ -18,7 +18,7 @@ const JobStats = () => {
 
   useEffect(() => {
     if (user) dispatch(fetchJobStats({ token: user.token }));
-  }, [dispatch, user?.token]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (error) {
