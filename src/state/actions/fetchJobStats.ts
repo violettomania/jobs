@@ -1,12 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../util/axiosWrapper';
-import getCookie from '../../util/getCookie';
+
+interface FetchJobStatsArg {
+  token: string;
+}
 
 export const fetchJobStats = createAsyncThunk(
   'jobs/fetchJobStats',
-  async () => {
-    const token = getCookie('token');
+  async ({ token }: FetchJobStatsArg, thunkAPI) => {
     try {
       const response = await customFetch.get('jobs/stats', {
         headers: {
@@ -15,7 +17,10 @@ export const fetchJobStats = createAsyncThunk(
       });
       return response.data;
     } catch (error: unknown) {
-      throw new Error('An error occurred');
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue('An error occurred');
     }
   }
 );

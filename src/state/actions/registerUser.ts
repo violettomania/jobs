@@ -16,7 +16,7 @@ interface RegistrationSuccessResponse {
 
 export const registerUser = createAsyncThunk(
   'user/register',
-  async (user: { name: string; email: string; password: string }) => {
+  async (user: { name: string; email: string; password: string }, thunkAPI) => {
     try {
       const {
         data: { user: userData },
@@ -28,9 +28,9 @@ export const registerUser = createAsyncThunk(
     } catch (error: unknown) {
       const err = error as RegistrationErrorResponse;
       if (err.response?.data.msg) {
-        throw new Error(err.response.data.msg);
+        return thunkAPI.rejectWithValue(err.response.data.msg);
       } else {
-        throw new Error('An error occurred');
+        return thunkAPI.rejectWithValue('An error occurred');
       }
     }
   }

@@ -16,12 +16,15 @@ interface LoginSuccessResponse {
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async (user: {
-    email: string;
-    password: string;
-    token: string;
-    isDemo?: boolean;
-  }) => {
+  async (
+    user: {
+      email: string;
+      password: string;
+      token: string;
+      isDemo?: boolean;
+    },
+    thunkAPI
+  ) => {
     try {
       const {
         data: { user: userData },
@@ -41,9 +44,9 @@ export const loginUser = createAsyncThunk(
     } catch (error: unknown) {
       const err = error as LoginErrorResponse;
       if (err.response?.data.msg) {
-        throw new Error(err.response.data.msg);
+        return thunkAPI.rejectWithValue(err.response.data.msg);
       } else {
-        throw new Error('An error occurred');
+        return thunkAPI.rejectWithValue('An error occurred');
       }
     }
   }

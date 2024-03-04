@@ -6,7 +6,6 @@ import Wrapper from '../assets/wrappers/Navbar';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { logout } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';
-import clearCookie from '../util/clearCookie';
 
 import Logo from './Logo';
 
@@ -24,8 +23,6 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
 
   const handleLogout = () => {
     dispatch(logout());
-    localStorage.clear();
-    clearCookie('token');
     navigate('/landing');
   };
 

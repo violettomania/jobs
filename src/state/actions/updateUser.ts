@@ -1,26 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import customFetch from '../../util/axiosWrapper';
-import getCookie from '../../util/getCookie';
 
 export const updateUser = createAsyncThunk(
   'user/update',
-  async (user: {
-    email: string;
-    lastName: string;
-    location: string;
-    name: string;
-  }) => {
+  async (
+    user: {
+      email: string;
+      lastName: string;
+      location: string;
+      name: string;
+      token: string;
+    },
+    thunkAPI
+  ) => {
     try {
-      const token = getCookie('token');
       const response = await customFetch.patch('auth/updateUser', user, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
       return response.data;
     } catch (error: unknown) {
-      throw new Error('An error occurred');
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue('An error occurred');
     }
   }
 );

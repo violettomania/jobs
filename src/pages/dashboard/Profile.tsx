@@ -21,6 +21,7 @@ const Profile = () => {
     email: user?.email || '',
     lastName: user?.lastName || '',
     location: user?.location || '',
+    token: user?.token || '',
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

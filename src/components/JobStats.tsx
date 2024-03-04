@@ -11,13 +11,14 @@ import LoadingSpinner from './LoadingSpinner';
 
 const JobStats = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState) => state.user.user);
   const loading = useAppSelector((state: RootState) => state.jobs.loading);
   const jobStats = useAppSelector((state: RootState) => state.jobs.jobStats);
   const error = useAppSelector((state: RootState) => state.jobs.error);
 
   useEffect(() => {
-    dispatch(fetchJobStats());
-  }, [dispatch]);
+    if (user) dispatch(fetchJobStats({ token: user.token }));
+  }, [dispatch, user?.token]);
 
   useEffect(() => {
     if (error) {
