@@ -26,7 +26,7 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
     dispatch(logout());
     localStorage.clear();
     clearCookie('token');
-    navigate('/');
+    navigate('/landing');
   };
 
   return (
@@ -36,7 +36,7 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
           <FaAlignLeft />
         </button>
         <div>
-          <Link to='/dashboard'>
+          <Link to='/'>
             <Logo />
             <h3 className='logo-text'>dashboard</h3>
           </Link>

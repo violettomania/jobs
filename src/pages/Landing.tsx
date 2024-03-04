@@ -12,7 +12,7 @@ const Landing = () => {
     <Wrapper>
       <main>
         <nav>
-          <Link to='/'>
+          <Link to='/landing'>
             <Logo />
           </Link>
         </nav>

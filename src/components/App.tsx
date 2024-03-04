@@ -12,8 +12,8 @@ import JobStats from './JobStats';
 export default function App() {
   return (
     <Routes>
-      <Route path='/' element={<Landing />} />
-      <Route path='/dashboard' element={<SharedLayout />}>
+      <Route path='/landing' element={<Landing />} />
+      <Route path='/' element={<SharedLayout />}>
         <Route index element={<JobStats />} />
         <Route path='profile' element={<Profile />} />
       </Route>
