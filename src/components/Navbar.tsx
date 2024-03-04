@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -25,6 +25,12 @@ const Navbar = ({ onSidebarToggle }: NavbarProps) => {
     dispatch(logout());
     navigate('/landing');
   };
+
+  useEffect(() => {
+    if (user) {
+      console.log('user in navbar', user);
+    }
+  }, [user]);
 
   return (
     <Wrapper>

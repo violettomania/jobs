@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './components/App';
+import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
 import store, { persistor } from './state/store/store';
 
@@ -24,7 +25,9 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={<LoadingSpinner />} persistor={persistor}>
-          <App />
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
         </PersistGate>
       </Provider>
     </BrowserRouter>

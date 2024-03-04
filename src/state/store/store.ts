@@ -8,6 +8,7 @@ import userSlice from '../slices/userSlice';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['user', 'jobStats'],
 };
 
 const rootReducer = combineReducers({
