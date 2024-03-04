@@ -17,7 +17,7 @@ const Profile = () => {
 
   const dispatch = useAppDispatch();
 
-  useRehydrateOnPageRefresh();
+  //   useRehydrateOnPageRefresh();
 
   const [userData, setUserData] = useState({
     name: user?.name || '',

@@ -12,6 +12,7 @@ interface MonthlyApplicationsProps {
 const ChartsContainer = ({ monthlyApplications }: MonthlyApplicationsProps) => {
   const [barChart, setBarChart] = useState(true);
 
+  // TODO: handle empty chart
   return (
     <Wrapper>
       <h4>Monthly Applications</h4>
