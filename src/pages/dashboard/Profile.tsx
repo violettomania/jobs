@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 import FormRow from '../../components/FormRow';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
-import { useRehydrateOnPageRefresh } from '../../hooks/useRehydrateOnPageRefresh';
 import { updateUser } from '../../state/actions/updateUser';
 import { finishUserUpdate } from '../../state/slices/userSlice';
 import { RootState } from '../../state/store/store';
@@ -16,8 +15,6 @@ const Profile = () => {
   const userUpdated = useAppSelector((state: RootState) => state.user.updated);
 
   const dispatch = useAppDispatch();
-
-  //   useRehydrateOnPageRefresh();
 
   const [userData, setUserData] = useState({
     name: user?.name || '',
@@ -39,7 +36,6 @@ const Profile = () => {
 
   useEffect(() => {
     if (userUpdated) {
-      localStorage.setItem('user', JSON.stringify(user));
       toast.success('user info updated');
       dispatch(finishUserUpdate());
     }

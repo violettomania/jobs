@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
 import { Logo } from '../components';
-import { useRehydrateOnPageRefresh } from '../hooks/useRehydrateOnPageRefresh';
 
 const Landing = () => {
-  useRehydrateOnPageRefresh();
-
   return (
     <Wrapper>
       <main>

@@ -6,7 +6,6 @@ import Wrapper from '../assets/wrappers/RegisterPage';
 import { Logo } from '../components';
 import FormRow from '../components/FormRow';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import useUserStorage from '../hooks/useLocalStorage';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
 
@@ -41,8 +40,6 @@ const Login = () => {
       })
     );
   };
-
-  useUserStorage();
 
   // TODO: there's no error for not registered user
   useEffect(() => {

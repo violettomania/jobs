@@ -1,12 +1,10 @@
-import { stat } from 'fs';
-
 import { createSlice } from '@reduxjs/toolkit';
 
 import { loginUser } from '../actions/loginUser';
 import { registerUser } from '../actions/registerUser';
 import { updateUser } from '../actions/updateUser';
 
-interface UserState {
+export interface UserState {
   user: User | null;
   loading: boolean;
   error?: string;

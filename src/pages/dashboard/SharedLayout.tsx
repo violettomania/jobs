@@ -5,15 +5,16 @@ import Wrapper from '../../assets/wrappers/SharedLayout';
 import BigSidebar from '../../components/BigSidebar';
 import Navbar from '../../components/Navbar';
 import SmallSidebar from '../../components/SmallSidebar';
-import { useRehydrateOnPageRefresh } from '../../hooks/useRehydrateOnPageRefresh';
+import { useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { RootState } from '../../state/store/store';
 
 const SharedLayout = () => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
-  const navigate = useNavigate();
+  const user = useAppSelector((state: RootState) => state.user.user);
 
-  useRehydrateOnPageRefresh('/');
+  const navigate = useNavigate();
 
   const handleSmallSidebarToggle = () => {
     setSmallSidebarOpen(!smallSidebarOpen);
@@ -25,10 +26,10 @@ const SharedLayout = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('user') === null) {
+    if (!user) {
       navigate('/landing');
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   return (
     <>
