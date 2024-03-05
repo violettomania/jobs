@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchJobStats } from '../actions/fetchJobStats';
 
-interface JobsState {
+interface JobStatsState {
   jobStats: JobStats;
   loading: boolean;
   error?: string;
 }
 
-const initialState: JobsState = {
+const initialState: JobStatsState = {
   jobStats: {
     defaultStats: {
       pending: 0,
@@ -21,7 +21,7 @@ const initialState: JobsState = {
   error: '',
 };
 
-export const jobsSlice = createSlice({
+export const jobStatsSlice = createSlice({
   name: 'jobStats',
   initialState,
   reducers: {},
@@ -41,4 +41,4 @@ export const jobsSlice = createSlice({
   },
 });
 
-export default jobsSlice.reducer;
+export default jobStatsSlice.reducer;
