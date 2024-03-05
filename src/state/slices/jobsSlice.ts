@@ -2,18 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchJobs } from '../actions/fetchJobs';
 
-interface Job {
-  id: string;
-  company: string;
-  position: string;
-  status: string;
-  jobType: string;
-  jobLocation: string;
-  createdBy: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface JobsState {
   loading: boolean;
   jobs: Job[];
@@ -23,29 +11,29 @@ interface JobsState {
   stats: JobStats;
   monthlyApplications: MonthlyApplication[];
   search: string;
-  searchStatus: string;
-  searchType: string;
+  status: string;
+  jobType: string;
   sort: string;
   sortOptions: string[];
 }
 
 interface FilterState {
   search: string;
-  searchStatus: string;
-  searchType: string;
+  status: string;
+  jobType: string;
   sort: string;
   sortOptions: string[];
 }
 
 const initialFiltersState: FilterState = {
   search: '',
-  searchStatus: 'all',
-  searchType: 'all',
+  status: 'all',
+  jobType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 };
 
-const initialState: JobsState = {
+const initialState: JobsState & FilterState = {
   loading: true,
   jobs: [],
   totalJobs: 0,
@@ -75,7 +63,7 @@ const jobsSlice = createSlice({
     },
     handleChange: (state, { payload: { name, value } }) => {
       state.page = 1;
-      //       state[name] = value;
+      // state[name] = value;
     },
     clearFilters: (state) => {
       return { ...state, ...initialFiltersState };

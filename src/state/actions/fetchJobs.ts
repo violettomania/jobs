@@ -3,21 +3,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import customFetch from '../../util/axiosWrapper';
 
 interface FetchJobsArg {
-  page: number;
-  search: boolean;
-  searchStatus: string;
-  searchType: string;
-  sort: string;
+  page?: number;
+  search?: string;
+  status?: string;
+  jobType?: string;
+  sort?: string;
   token: string;
 }
 
 export const fetchJobs = createAsyncThunk(
-  'jobs/fetchJobStats',
+  'jobs/fetchJobs',
   async (
-    { page, search, searchStatus, searchType, sort, token }: FetchJobsArg,
+    { page, search, status, jobType, sort, token }: FetchJobsArg,
     thunkAPI
   ) => {
-    let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+    let url = `/jobs?status=${status}&jobType=${jobType}&sort=${sort}&page=${page}`;
     if (search) {
       url = url + `&search=${search}`;
     }

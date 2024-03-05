@@ -8,43 +8,29 @@ import { useAppDispatch } from '../hooks/reduxHooksWrapper';
 import JobInfo from './JobInfo';
 
 interface JobProps {
-  _id: string;
-  position: string;
-  company: string;
-  jobLocation: string;
-  jobType: string;
-  createdAt: string;
-  status: string;
+  job: Job;
 }
 
-const Job = ({
-  _id,
-  position,
-  company,
-  jobLocation,
-  jobType,
-  createdAt,
-  status,
-}: JobProps) => {
+const SingleJob = ({ job }: JobProps) => {
   const dispatch = useAppDispatch();
 
-  const date = moment(createdAt).format('MMM Do, YYYY');
+  const date = moment(job.createdAt).format('MMM Do, YYYY');
 
   return (
     <Wrapper>
       <header>
-        <div className='main-icon'>{company.charAt(0)}</div>
+        <div className='main-icon'>{job.company.charAt(0)}</div>
         <div className='info'>
-          <h5>{position}</h5>
-          <p>{company}</p>
+          <h5>{job.position}</h5>
+          <p>{job.company}</p>
         </div>
       </header>
       <div className='content'>
         <div className='content-center'>
-          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaLocationArrow />} text={job.jobLocation} />
           <JobInfo icon={<FaCalendarAlt />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={jobType} />
-          <div className={`status ${status}`}>{status}</div>
+          <JobInfo icon={<FaBriefcase />} text={job.jobType} />
+          <div className={`status ${job.status}`}>{job.status}</div>
         </div>
         <footer>
           <div className='actions'>
@@ -80,4 +66,4 @@ const Job = ({
   );
 };
 
-export default Job;
+export default SingleJob;

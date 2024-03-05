@@ -1,54 +1,68 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import Wrapper from '../assets/wrappers/JobsContainer';
-// import { getAllJobs } from '../features/allJobs/allJobsSlice';
-import { useAppDispatch } from '../hooks/reduxHooksWrapper';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { fetchJobs } from '../state/actions/fetchJobs';
+import { RootState } from '../state/store/store';
 
-import Job from './Job';
+import SingleJob from './Job';
 import LoadingSpinner from './LoadingSpinner';
 import PageBtnContainer from './PageBtnContainer';
 
 const JobsContainer = () => {
-  //   const {
-  //     jobs,
-  //     isLoading,
-  //     page,
-  //     totalJobs,
-  //     numOfPages,
-  //     search,
-  //     searchStatus,
-  //     searchType,
-  //     sort,
-  //   } = useSelector((store) => store.allJobs);
+  const {
+    jobs,
+    loading,
+    page,
+    totalJobs,
+    numOfPages,
+    search,
+    status,
+    jobType,
+    sort,
+  } = useAppSelector((state: RootState) => state.jobs);
+
+  const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
 
-  //   useEffect(() => {
-  //         dispatch(getAllJobs());
-  //   }, [dispatch, page, search, searchStatus, searchType, sort]);
+  useEffect(() => {
+    if (user) {
+      dispatch(
+        fetchJobs({
+          status: 'all',
+          jobType: 'all',
+          sort: 'latest',
+          token: user.token,
+          page: 1,
+        })
+      );
+    }
+  }, [dispatch, page, search, sort, user, user?.token]);
 
-  //   if (loading) {
-  //     return <LoadingSpinner />;
-  //   }
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
-  //   if (jobs.length === 0) {
-  //     return (
-  //       <Wrapper>
-  //         <h2>No jobs to display...</h2>
-  //       </Wrapper>
-  //     );
-  //   }
+  if (jobs.length === 0) {
+    return (
+      <Wrapper>
+        <h2>No jobs to display...</h2>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
-      <h5>{/* {totalJobs} job{jobs.length > 1 && 's'} found */}</h5>
+      <h5>
+        {totalJobs} job{jobs.length > 1 && 's'} found
+      </h5>
       <div className='jobs'>
-        {/* {jobs.map((job) => {
-          return <Job key={job._id} {...job} />;
-        })} */}
+        {jobs.map((job) => {
+          return <SingleJob key={job._id} job={job} />;
+        })}
       </div>
-      {/* {numOfPages > 1 && <PageBtnContainer />} */}
+      {numOfPages > 1 && <PageBtnContainer />}
     </Wrapper>
   );
 };

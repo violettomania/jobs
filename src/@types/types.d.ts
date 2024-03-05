@@ -20,3 +20,13 @@ interface JobStats {
   };
   monthlyApplications: MonthlyApplication[];
 }
+
+interface Job {
+  _id: string;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobType: string;
+  createdAt: string;
+  status: string;
+}
