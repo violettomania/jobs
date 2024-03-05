@@ -13,7 +13,7 @@ type Link = {
 
 const links: Link[] = [
   { id: 1, text: 'stats', path: '/', icon: IoBarChartSharp },
-  { id: 2, text: 'all jobs', path: 'all-jobs', icon: MdQueryStats },
+  { id: 2, text: 'all jobs', path: 'jobs', icon: MdQueryStats },
   { id: 3, text: 'add job', path: 'add-job', icon: FaWpforms },
   { id: 4, text: 'profile', path: 'profile', icon: ImProfile },
 ];
