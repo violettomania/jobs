@@ -5,12 +5,28 @@ import { deleteJob } from '../actions/deleteJob';
 import { editJob } from '../actions/editJob';
 
 interface JobState {
+  job: Job;
+  jobTypeOptions: string[];
+  statusOptions: string[];
+  isEditing: boolean;
   loading: boolean;
   jobDeleted: boolean;
   deleteError?: string;
 }
 
 const initialState: JobState = {
+  job: {
+    _id: '',
+    position: '',
+    company: '',
+    jobLocation: '',
+    jobType: '',
+    createdAt: '',
+    status: '',
+  },
+  jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
+  statusOptions: ['interview', 'declined', 'pending'],
+  isEditing: false,
   loading: false,
   jobDeleted: false,
   deleteError: '',

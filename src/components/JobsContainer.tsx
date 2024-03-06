@@ -5,9 +5,9 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchJobs } from '../state/actions/fetchJobs';
 import { RootState } from '../state/store/store';
 
-import SingleJob from './Job';
 import LoadingSpinner from './LoadingSpinner';
 import PageBtnContainer from './PageBtnContainer';
+import SingleJob from './SingleJob';
 
 const JobsContainer = () => {
   const {
