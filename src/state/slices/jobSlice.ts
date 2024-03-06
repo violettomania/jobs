@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createJob } from '../actions/createJob';
 import { deleteJob } from '../actions/deleteJob';
+import { editJob } from '../actions/editJob';
 
 interface JobState {
   loading: boolean;
@@ -20,7 +21,7 @@ const jobSlice = createSlice({
   initialState,
   reducers: {
     handleChange: (state, { payload: { name, value } }) => {
-      //       state[name] = value;
+      // §state[name] = value;
     },
     clearValues: () => {
       return {
@@ -49,6 +50,16 @@ const jobSlice = createSlice({
       .addCase(deleteJob.rejected, (state, action) => {
         state.jobDeleted = false;
         state.deleteError = action.error.message;
+      })
+      .addCase(editJob.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editJob.fulfilled, (state) => {
+        // TODO: add job
+        state.loading = false;
+      })
+      .addCase(editJob.rejected, (state, { payload }) => {
+        state.loading = false;
       });
   },
 });
