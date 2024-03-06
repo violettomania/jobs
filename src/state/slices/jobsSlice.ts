@@ -10,7 +10,7 @@ interface JobsState {
   page: number;
   stats: JobStats;
   monthlyApplications: MonthlyApplication[];
-  search: string;
+  searchTerm: string;
   status: string;
   jobType: string;
   sort: string;
@@ -18,7 +18,7 @@ interface JobsState {
 }
 
 interface FilterState {
-  search: string;
+  searchTerm: string;
   status: string;
   jobType: string;
   sort: string;
@@ -26,7 +26,7 @@ interface FilterState {
 }
 
 const initialFiltersState: FilterState = {
-  search: '',
+  searchTerm: '',
   status: 'all',
   jobType: 'all',
   sort: 'latest',
@@ -61,9 +61,8 @@ const jobsSlice = createSlice({
     hideLoading: (state) => {
       state.loading = false;
     },
-    handleChange: (state, { payload: { name, value } }) => {
-      state.page = 1;
-      // state[name] = value;
+    search: (state, { payload }) => {
+      state.searchTerm = payload;
     },
     clearFilters: (state) => {
       return { ...state, ...initialFiltersState };
@@ -71,7 +70,7 @@ const jobsSlice = createSlice({
     changePage: (state, { payload }) => {
       state.page = payload;
     },
-    clearAllJobsState: (state) => initialState,
+    clearJobs: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -93,10 +92,10 @@ const jobsSlice = createSlice({
 export const {
   showLoading,
   hideLoading,
-  handleChange,
+  search,
   clearFilters,
   changePage,
-  clearAllJobsState,
+  clearJobs,
 } = jobsSlice.actions;
 
 export default jobsSlice.reducer;

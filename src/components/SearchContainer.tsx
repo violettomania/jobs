@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect, useMemo } from 'react';
 
 import Wrapper from '../assets/wrappers/SearchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { handleChange } from '../state/slices/jobsSlice';
+import { search } from '../state/slices/jobsSlice';
 import { clearFilters } from '../state/slices/jobsSlice';
 import { RootState } from '../state/store/store';
 
@@ -10,7 +10,7 @@ import FormRow from './FormRow';
 import FormRowSelect from './FormRowSelect';
 
 const SearchContainer = () => {
-  const [localSearch, setLocalSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const { loading, status, jobType, sort, sortOptions } = useAppSelector(
     (state: RootState) => state.jobs
@@ -23,7 +23,7 @@ const SearchContainer = () => {
   const dispatch = useAppDispatch();
 
   const handleSearch = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+    dispatch(search(e.target.value));
   };
 
   const debounceSearch = useMemo(() => {
@@ -31,22 +31,22 @@ const SearchContainer = () => {
     let timeoutID: NodeJS.Timeout;
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log('debounce inner', e.target.value);
-      setLocalSearch(e.target.value);
+      setSearchTerm(e.target.value);
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
-        dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+        dispatch(search(e.target.value));
       }, 1000);
     };
   }, [dispatch]);
 
   const handleClick = () => {
-    setLocalSearch('');
+    setSearchTerm('');
     dispatch(clearFilters());
   };
 
   useEffect(() => {
-    console.log('localSearch', localSearch);
-  }, [localSearch]);
+    console.log('searchTerm', searchTerm);
+  }, [searchTerm]);
 
   return (
     <Wrapper>
@@ -57,7 +57,7 @@ const SearchContainer = () => {
           <FormRow
             type='text'
             name='search'
-            value={localSearch}
+            value={searchTerm}
             handleChange={debounceSearch}
             disabled={false}
           />

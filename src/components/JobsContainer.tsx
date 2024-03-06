@@ -16,7 +16,7 @@ const JobsContainer = () => {
     page,
     totalJobs,
     numOfPages,
-    search,
+    searchTerm,
     status,
     jobType,
     sort,
@@ -38,7 +38,7 @@ const JobsContainer = () => {
         })
       );
     }
-  }, [dispatch, page, search, sort, user, user?.token]);
+  }, [dispatch, page, searchTerm, sort, user, user?.token]);
 
   if (loading) {
     return <LoadingSpinner />;
