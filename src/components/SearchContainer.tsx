@@ -1,4 +1,4 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useEffect, useMemo } from 'react';
 
 import Wrapper from '../assets/wrappers/SearchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
@@ -26,9 +26,11 @@ const SearchContainer = () => {
     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
   };
 
-  const debounceSearch = useCallback(() => {
+  const debounceSearch = useMemo(() => {
+    console.log('debounce');
     let timeoutID: NodeJS.Timeout;
     return (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log('debounce inner', e.target.value);
       setLocalSearch(e.target.value);
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
@@ -41,6 +43,10 @@ const SearchContainer = () => {
     setLocalSearch('');
     dispatch(clearFilters());
   };
+
+  useEffect(() => {
+    console.log('localSearch', localSearch);
+  }, [localSearch]);
 
   return (
     <Wrapper>
