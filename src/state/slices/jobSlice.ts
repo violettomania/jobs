@@ -38,8 +38,8 @@ const jobSlice = createSlice({
   name: 'job',
   initialState,
   reducers: {
-    handleChange: (state, { payload: { name, value } }) => {
-      // §state[name] = value;
+    handleJobChange: (state, { payload: { name, value } }) => {
+      state[name] = value;
     },
     clearValues: () => {
       return {
@@ -82,7 +82,7 @@ const jobSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues, flagJobAsBeingEdited } =
+export const { handleJobChange, clearValues, flagJobAsBeingEdited } =
   jobSlice.actions;
 
 export default jobSlice.reducer;

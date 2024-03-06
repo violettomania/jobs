@@ -7,7 +7,7 @@ import FormRowSelect from '../../components/FormRowSelect';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
 import { createJob } from '../../state/actions/createJob';
 import { editJob } from '../../state/actions/editJob';
-import { handleChange, clearValues } from '../../state/slices/jobSlice';
+import { handleJobChange, clearValues } from '../../state/slices/jobSlice';
 import { RootState } from '../../state/store/store';
 
 const AddJob = () => {
@@ -49,13 +49,13 @@ const AddJob = () => {
   ) => {
     const name = e.target.name;
     const value = e.target.value;
-    dispatch(handleChange({ name, value }));
+    dispatch(handleJobChange({ name, value }));
   };
 
   useEffect(() => {
     if (!isEditing && user) {
       dispatch(
-        handleChange({
+        handleJobChange({
           name: 'jobLocation',
           value: user.location,
         })
