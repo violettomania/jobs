@@ -6,7 +6,7 @@ import { fetchJobs } from '../state/actions/fetchJobs';
 import { RootState } from '../state/store/store';
 
 import LoadingSpinner from './LoadingSpinner';
-import PageBtnContainer from './PageBtnContainer';
+import Pagination from './Pagination';
 import SingleJob from './SingleJob';
 
 const JobsContainer = () => {
@@ -62,7 +62,7 @@ const JobsContainer = () => {
           return <SingleJob key={job._id} job={job} />;
         })}
       </div>
-      {numOfPages > 1 && <PageBtnContainer />}
+      {numOfPages > 1 && <Pagination />}
     </Wrapper>
   );
 };
