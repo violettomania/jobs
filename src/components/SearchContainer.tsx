@@ -1,8 +1,8 @@
-import { useState, ChangeEvent, useEffect, useMemo } from 'react';
+import { useState, ChangeEvent, useMemo } from 'react';
 
 import Wrapper from '../assets/wrappers/SearchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { search } from '../state/slices/jobsSlice';
+import { FilterState, JobsState, search } from '../state/slices/jobsSlice';
 import { clearFilters } from '../state/slices/jobsSlice';
 import { RootState } from '../state/store/store';
 
@@ -11,19 +11,27 @@ import FormRowSelect from './FormRowSelect';
 
 const SearchContainer = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [status, setStatus] = useState('all');
+  const [jobType, setJobType] = useState('all');
+  const [sort, setSort] = useState('latest');
 
-  const { loading, status, jobType, sort, sortOptions } = useAppSelector(
+  const { loading, sortOptions } = useAppSelector(
     (state: RootState) => state.jobs
   );
 
   const { jobTypeOptions, statusOptions } = useAppSelector(
-    (store: RootState) => store.job
+    (state: RootState) => state.job
   );
 
   const dispatch = useAppDispatch();
 
   const handleSearch = (e: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(search(e.target.value));
+    dispatch(
+      search({
+        name: e.target.name as keyof JobsState & FilterState,
+        value: e.target.value,
+      })
+    );
   };
 
   const debounceSearch = useMemo(() => {
@@ -32,7 +40,12 @@ const SearchContainer = () => {
       setSearchTerm(e.target.value);
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
-        dispatch(search(e.target.value));
+        dispatch(
+          search({
+            name: e.target.name as keyof JobsState & FilterState,
+            value: e.target.value,
+          })
+        );
       }, 1000);
     };
   }, [dispatch]);
@@ -50,7 +63,7 @@ const SearchContainer = () => {
           {/* search position */}
           <FormRow
             type='text'
-            name='search'
+            name='searchTerm'
             value={searchTerm}
             handleChange={debounceSearch}
             disabled={false}
@@ -58,25 +71,33 @@ const SearchContainer = () => {
           {/* search by status */}
           <FormRowSelect
             labelText='status'
-            name='searchStatus'
+            name='status'
             value={status}
-            handleChange={handleSearch}
+            handleChange={(e) => {
+              setStatus(e.target.value);
+              handleSearch(e);
+            }}
             list={['all', ...statusOptions]}
           />
-
           {/* search by type*/}
           <FormRowSelect
             labelText='type'
-            name='searchType'
+            name='jobType'
             value={jobType}
-            handleChange={handleSearch}
+            handleChange={(e) => {
+              setJobType(e.target.value);
+              handleSearch(e);
+            }}
             list={['all', ...jobTypeOptions]}
           />
           {/* sort */}
           <FormRowSelect
             name='sort'
             value={sort}
-            handleChange={handleSearch}
+            handleChange={(e) => {
+              setSort(e.target.value);
+              handleSearch(e);
+            }}
             list={sortOptions}
             labelText='sort by'
           />

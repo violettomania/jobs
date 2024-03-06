@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { fetchJobs } from '../actions/fetchJobs';
 
-interface JobsState {
+export interface JobsState {
   loading: boolean;
   jobs: Job[];
   totalJobs: number;
@@ -17,7 +17,7 @@ interface JobsState {
   sortOptions: string[];
 }
 
-interface FilterState {
+export interface FilterState {
   searchTerm: string;
   status: string;
   jobType: string;
@@ -61,9 +61,15 @@ const jobsSlice = createSlice({
     hideLoading: (state) => {
       state.loading = false;
     },
-    search: (state, { payload }) => {
+    search: (
+      state,
+      action: PayloadAction<{
+        name: keyof JobsState & FilterState;
+        value: JobsState[keyof JobsState] & FilterState[keyof FilterState];
+      }>
+    ) => {
       state.page = 1;
-      state.searchTerm = payload;
+      (state as any)[action.payload.name] = action.payload.value;
     },
     clearFilters: (state) => {
       return { ...state, ...initialFiltersState };
