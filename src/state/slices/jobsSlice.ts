@@ -62,6 +62,7 @@ const jobsSlice = createSlice({
       state.loading = false;
     },
     search: (state, { payload }) => {
+      state.page = 1;
       state.searchTerm = payload;
     },
     clearFilters: (state) => {
@@ -83,7 +84,7 @@ const jobsSlice = createSlice({
         state.numOfPages = payload.numOfPages;
         state.totalJobs = payload.totalJobs;
       })
-      .addCase(fetchJobs.rejected, (state, { payload }) => {
+      .addCase(fetchJobs.rejected, (state) => {
         state.loading = false;
       });
   },

@@ -27,10 +27,8 @@ const SearchContainer = () => {
   };
 
   const debounceSearch = useMemo(() => {
-    console.log('debounce');
     let timeoutID: NodeJS.Timeout;
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log('debounce inner', e.target.value);
       setSearchTerm(e.target.value);
       clearTimeout(timeoutID);
       timeoutID = setTimeout(() => {
@@ -43,10 +41,6 @@ const SearchContainer = () => {
     setSearchTerm('');
     dispatch(clearFilters());
   };
-
-  useEffect(() => {
-    console.log('searchTerm', searchTerm);
-  }, [searchTerm]);
 
   return (
     <Wrapper>

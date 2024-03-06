@@ -4,7 +4,7 @@ import customFetch from '../../util/axiosWrapper';
 
 interface FetchJobsArg {
   page?: number;
-  search?: string;
+  searchTerm?: string;
   status?: string;
   jobType?: string;
   sort?: string;
@@ -14,12 +14,12 @@ interface FetchJobsArg {
 export const fetchJobs = createAsyncThunk(
   'jobs/fetchJobs',
   async (
-    { page, search, status, jobType, sort, token }: FetchJobsArg,
+    { page, searchTerm, status, jobType, sort, token }: FetchJobsArg,
     thunkAPI
   ) => {
     let url = `/jobs?status=${status}&jobType=${jobType}&sort=${sort}&page=${page}`;
-    if (search) {
-      url = url + `&search=${search}`;
+    if (searchTerm) {
+      url = url + `&search=${searchTerm}`;
     }
     try {
       const response = await customFetch.get(url, {
