@@ -11,11 +11,8 @@ import FormRowSelect from './FormRowSelect';
 
 const SearchContainer = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [status, setStatus] = useState('all');
-  const [jobType, setJobType] = useState('all');
-  const [sort, setSort] = useState('latest');
 
-  const { loading, sortOptions } = useAppSelector(
+  const { loading, sortOptions, status, jobType, sort } = useAppSelector(
     (state: RootState) => state.jobs
   );
 
@@ -34,7 +31,7 @@ const SearchContainer = () => {
     );
   };
 
-  const debounceSearch = useMemo(() => {
+  const handleDebouncedSearch = useMemo(() => {
     let timeoutID: NodeJS.Timeout;
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(e.target.value);
@@ -65,7 +62,7 @@ const SearchContainer = () => {
             type='text'
             name='searchTerm'
             value={searchTerm}
-            handleChange={debounceSearch}
+            handleChange={handleDebouncedSearch}
             disabled={false}
           />
           {/* search by status */}
@@ -73,10 +70,7 @@ const SearchContainer = () => {
             labelText='status'
             name='status'
             value={status}
-            handleChange={(e) => {
-              setStatus(e.target.value);
-              handleSearch(e);
-            }}
+            handleChange={handleSearch}
             list={['all', ...statusOptions]}
           />
           {/* search by type*/}
@@ -84,20 +78,14 @@ const SearchContainer = () => {
             labelText='type'
             name='jobType'
             value={jobType}
-            handleChange={(e) => {
-              setJobType(e.target.value);
-              handleSearch(e);
-            }}
+            handleChange={handleSearch}
             list={['all', ...jobTypeOptions]}
           />
           {/* sort */}
           <FormRowSelect
             name='sort'
             value={sort}
-            handleChange={(e) => {
-              setSort(e.target.value);
-              handleSearch(e);
-            }}
+            handleChange={handleSearch}
             list={sortOptions}
             labelText='sort by'
           />
