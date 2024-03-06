@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 import Wrapper from '../assets/wrappers/SearchContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
@@ -22,7 +22,7 @@ const SearchContainer = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleSearch = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(
       search({
         name: e.target.name as keyof JobsState & FilterState,
