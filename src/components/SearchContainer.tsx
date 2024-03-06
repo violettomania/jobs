@@ -1,7 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useCallback, ChangeEvent } from 'react';
 
 import Wrapper from '../assets/wrappers/SearchContainer';
-// import { handleChange, clearFilters } from '../features/allJobs/allJobsSlice';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { handleChange } from '../state/slices/jobsSlice';
+import { clearFilters } from '../state/slices/jobsSlice';
+import { RootState } from '../state/store/store';
 
 import FormRow from './FormRow';
 import FormRowSelect from './FormRowSelect';
@@ -9,35 +12,35 @@ import FormRowSelect from './FormRowSelect';
 const SearchContainer = () => {
   const [localSearch, setLocalSearch] = useState('');
 
-  //   const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
-  //     useSelector((store) => store.allJobs);
+  const { loading, status, jobType, sort, sortOptions } = useAppSelector(
+    (state: RootState) => state.jobs
+  );
 
-  //   const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
+  const { jobTypeOptions, statusOptions } = useAppSelector(
+    (store: RootState) => store.job
+  );
 
-  //   const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  //   const handleSearch = (e) => {
-  //     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
-  //   };
+  const handleSearch = (e: ChangeEvent<HTMLSelectElement>) => {
+    dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+  };
 
-  //   const debounce = () => {
-  //     let timeoutID;
-  //     return (e) => {
-  //       setLocalSearch(e.target.value);
-  //       clearTimeout(timeoutID);
-  //       timeoutID = setTimeout(() => {
-  //         dispatch(handleChange({ name: e.target.name, value: e.target.value }));
-  //       }, 1000);
-  //     };
-  //   };
+  const debounceSearch = useCallback(() => {
+    let timeoutID: NodeJS.Timeout;
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLocalSearch(e.target.value);
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(() => {
+        dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+      }, 1000);
+    };
+  }, [dispatch]);
 
-  //   const optimizedDebounce = useMemo(() => debounce(), [debounce]);
-
-  //   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     setLocalSearch('');
-  //     dispatch(clearFilters());
-  //   };
+  const handleClick = () => {
+    setLocalSearch('');
+    dispatch(clearFilters());
+  };
 
   return (
     <Wrapper>
@@ -49,38 +52,38 @@ const SearchContainer = () => {
             type='text'
             name='search'
             value={localSearch}
-            handleChange={() => {}}
+            handleChange={debounceSearch}
             disabled={false}
           />
           {/* search by status */}
           <FormRowSelect
             labelText='status'
             name='searchStatus'
-            value=''
-            handleChange={() => {}}
-            list={['all']}
+            value={status}
+            handleChange={handleSearch}
+            list={['all', ...statusOptions]}
           />
 
           {/* search by type*/}
           <FormRowSelect
             labelText='type'
             name='searchType'
-            value=''
-            handleChange={() => {}}
-            list={['all']}
+            value={jobType}
+            handleChange={handleSearch}
+            list={['all', ...jobTypeOptions]}
           />
           {/* sort */}
           <FormRowSelect
             name='sort'
-            value=''
-            handleChange={() => {}}
-            list={['all']}
+            value={sort}
+            handleChange={handleSearch}
+            list={sortOptions}
             labelText='sort by'
           />
           <button
             className='btn btn-block btn-danger'
-            //     disabled={loading}
-            //     onClick={handleSubmit}
+            disabled={loading}
+            onClick={handleClick}
           >
             clear filters
           </button>
