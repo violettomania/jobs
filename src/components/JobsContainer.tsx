@@ -14,9 +14,9 @@ const JobsContainer = () => {
     jobs,
     loading,
     page,
+    searchTerm,
     totalJobs,
     numOfPages,
-    searchTerm,
     status,
     jobType,
     sort,
@@ -30,15 +30,16 @@ const JobsContainer = () => {
     if (user) {
       dispatch(
         fetchJobs({
-          status: 'all',
-          jobType: 'all',
-          sort: 'latest',
+          page,
+          searchTerm,
+          status,
+          jobType,
+          sort,
           token: user.token,
-          page: 1,
         })
       );
     }
-  }, [dispatch, page, searchTerm, sort, user, user?.token]);
+  }, [dispatch, jobType, page, searchTerm, sort, status, user, user?.token]);
 
   if (loading) {
     return <LoadingSpinner />;
