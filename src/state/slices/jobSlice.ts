@@ -12,6 +12,7 @@ interface JobState {
   loading: boolean;
   jobDeleted: boolean;
   deleteError?: string;
+  editedJobId: string;
 }
 
 const initialState: JobState = {
@@ -30,6 +31,7 @@ const initialState: JobState = {
   loading: false,
   jobDeleted: false,
   deleteError: '',
+  editedJobId: '',
 };
 
 const jobSlice = createSlice({
@@ -45,7 +47,7 @@ const jobSlice = createSlice({
         jobLocation: '',
       };
     },
-    setEditJob: (state, { payload }) => {
+    flagJobAsBeingEdited: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
     },
   },
@@ -80,6 +82,7 @@ const jobSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues, setEditJob } = jobSlice.actions;
+export const { handleChange, clearValues, flagJobAsBeingEdited } =
+  jobSlice.actions;
 
 export default jobSlice.reducer;

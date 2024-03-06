@@ -3,7 +3,10 @@ import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/Job';
-import { useAppDispatch } from '../hooks/reduxHooksWrapper';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { deleteJob } from '../state/actions/deleteJob';
+import { flagJobAsBeingEdited } from '../state/slices/jobSlice';
+import { RootState } from '../state/store/store';
 
 import JobInfo from './JobInfo';
 
@@ -12,6 +15,8 @@ interface JobProps {
 }
 
 const SingleJob = ({ job }: JobProps) => {
+  const user = useAppSelector((state: RootState) => state.user.user);
+
   const dispatch = useAppDispatch();
 
   const date = moment(job.createdAt).format('MMM Do, YYYY');
@@ -37,25 +42,25 @@ const SingleJob = ({ job }: JobProps) => {
             <Link
               to='/add-job'
               className='btn edit-btn'
-              //       onClick={() =>
-              //         dispatch(
-              //           setEditJob({
-              //             editJobId: _id,
-              //             position,
-              //             company,
-              //             jobLocation,
-              //             jobType,
-              //             status,
-              //           })
-              //         )
-              //       }
+              onClick={() =>
+                dispatch(
+                  flagJobAsBeingEdited({
+                    editedJobId: job._id,
+                    ...job,
+                  })
+                )
+              }
             >
               Edit
             </Link>
             <button
               type='button'
               className='btn delete-btn'
-              //       onClick={() => dispatch(deleteJob(_id))}
+              onClick={() =>
+                dispatch(
+                  deleteJob({ jobId: job._id, token: user ? user?.token : '' })
+                )
+              }
             >
               delete
             </button>
