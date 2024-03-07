@@ -1,34 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { act } from 'react-dom/test-utils';
 
 import { createJob } from '../actions/createJob';
 import { deleteJob } from '../actions/deleteJob';
 import { editJob } from '../actions/editJob';
 
-interface JobState {
-  job: Job;
+export interface JobState {
+  _id: string;
+  position: string;
+  company: string;
+  jobLocation: string;
+  jobType: string;
+  createdAt: string;
+  status: string;
   jobTypeOptions: string[];
   statusOptions: string[];
   isEditing: boolean;
   loading: boolean;
+  jobAdded: boolean;
   jobDeleted: boolean;
   deleteError?: string;
   editedJobId: string;
 }
 
 const initialState: JobState = {
-  job: {
-    _id: '',
-    position: '',
-    company: '',
-    jobLocation: '',
-    jobType: '',
-    createdAt: '',
-    status: '',
-  },
+  _id: '',
+  position: '',
+  company: '',
+  jobLocation: '',
+  jobType: '',
+  createdAt: '',
+  status: '',
   jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
   statusOptions: ['interview', 'declined', 'pending'],
   isEditing: false,
   loading: false,
+  jobAdded: false,
   jobDeleted: false,
   deleteError: '',
   editedJobId: '',
@@ -38,8 +45,14 @@ const jobSlice = createSlice({
   name: 'job',
   initialState,
   reducers: {
-    handleJobChange: (state, { payload: { name, value } }) => {
-      state[name] = value;
+    handleJobChange: (
+      state,
+      action: PayloadAction<{
+        name: keyof JobState;
+        value: JobState[keyof JobState];
+      }>
+    ) => {
+      (state as any)[action.payload.name] = action.payload.value;
     },
     clearValues: () => {
       return {
@@ -55,12 +68,15 @@ const jobSlice = createSlice({
     builder
       .addCase(createJob.pending, (state) => {
         state.loading = true;
+        state.jobAdded = false;
       })
       .addCase(createJob.fulfilled, (state) => {
+        state.jobAdded = true;
         state.loading = false;
       })
-      .addCase(createJob.rejected, (state, { payload }) => {
+      .addCase(createJob.rejected, (state, action) => {
         state.loading = false;
+        state.jobAdded = false;
       })
       .addCase(deleteJob.fulfilled, (state, { payload }) => {
         state.jobDeleted = true;

@@ -4,6 +4,7 @@ interface FormRowSelectProps {
   value: string;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   list: string[];
+  disabled?: boolean;
 }
 
 const FormRowSelect = ({
@@ -12,6 +13,7 @@ const FormRowSelect = ({
   value,
   handleChange,
   list,
+  disabled,
 }: FormRowSelectProps) => {
   return (
     <div className='form-row'>
@@ -24,6 +26,7 @@ const FormRowSelect = ({
         value={value}
         onChange={handleChange}
         className='form-select'
+        disabled={disabled}
       >
         {list.map((itemValue, index) => {
           return (
