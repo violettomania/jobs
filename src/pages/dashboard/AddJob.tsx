@@ -81,7 +81,19 @@ const AddJob = () => {
     if (user?.isDemo) return;
     const name = e.target.name as keyof JobState;
     const value = e.target.value;
+    console.log(
+      'name',
+      name,
+      'value',
+      value,
+      'status',
+      status,
+      'jobType',
+      jobType
+    );
     dispatch(handleJobChange({ name, value }));
+    dispatch(handleJobChange({ name: 'status', value: status }));
+    dispatch(handleJobChange({ name: 'jobType', value: jobType }));
   };
 
   //   useEffect(() => {
