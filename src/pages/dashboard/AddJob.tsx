@@ -35,7 +35,8 @@ const AddJob = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (user?.isDemo) return;
     if (!position || !company || !jobLocation) {
       toast.error('Please fill out all fields');
@@ -61,7 +62,16 @@ const AddJob = () => {
         );
         return;
       }
-      dispatch(createJob({ job: { ...job }, token: user?.token }));
+      dispatch(
+        createJob({
+          company,
+          jobLocation,
+          jobType,
+          position,
+          status,
+          token: user?.token,
+        })
+      );
     }
   };
 
@@ -74,28 +84,17 @@ const AddJob = () => {
     dispatch(handleJobChange({ name, value }));
   };
 
-  useEffect(() => {
-    if (!isEditing && user && !user.isDemo) {
-      dispatch(
-        handleJobChange({
-          name: 'jobLocation',
-          value: user.location,
-        })
-      );
-    }
-  }, [dispatch, isEditing, user]);
-
-  useEffect(() => {
-    if (jobAdded) {
-      toast.success('Job added successfully');
-    } else {
-      toast.error('Error adding job; please try again');
-    }
-  }, [jobAdded]);
+  //   useEffect(() => {
+  //     if (jobAdded) {
+  //       toast.success('Job added successfully');
+  //     } else {
+  //       toast.error('Error adding job; please try again');
+  //     }
+  //   }, [jobAdded]);
 
   return (
     <Wrapper>
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <h3>{isEditing ? 'edit job' : 'add job'}</h3>
         <div className='form-center'>
           {/* position */}
@@ -153,7 +152,6 @@ const AddJob = () => {
               <button
                 type='submit'
                 className='btn btn-block submit-btn'
-                onClick={handleClick}
                 disabled={loading}
               >
                 submit
