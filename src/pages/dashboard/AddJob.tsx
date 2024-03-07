@@ -13,6 +13,7 @@ import {
 } from '../../state/slices/jobSlice';
 import { RootState } from '../../state/store/store';
 
+// TODO: add toast for job added successfully
 const AddJob = () => {
   const {
     loading,
