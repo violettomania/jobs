@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
@@ -92,8 +91,6 @@ const AddJob = () => {
       jobType
     );
     dispatch(handleJobChange({ name, value }));
-    dispatch(handleJobChange({ name: 'status', value: status }));
-    dispatch(handleJobChange({ name: 'jobType', value: jobType }));
   };
 
   //   useEffect(() => {
