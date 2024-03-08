@@ -16,9 +16,10 @@ export interface JobState {
   statusOptions: string[];
   isEditing: boolean;
   loading: boolean;
-  jobAdded: boolean;
-  jobDeleted: boolean;
-  deleteError?: string;
+  addJobSuccess: boolean;
+  addJobError: boolean;
+  deleteJobSuccess: boolean;
+  deleteJobError: boolean;
   editedJobId: string;
 }
 
@@ -34,9 +35,10 @@ const initialState: JobState = {
   statusOptions: ['interview', 'declined', 'pending'],
   isEditing: false,
   loading: false,
-  jobAdded: false,
-  jobDeleted: false,
-  deleteError: '',
+  addJobSuccess: false,
+  addJobError: false,
+  deleteJobSuccess: false,
+  deleteJobError: false,
   editedJobId: '',
 };
 
@@ -67,22 +69,20 @@ const jobSlice = createSlice({
     builder
       .addCase(createJob.pending, (state) => {
         state.loading = true;
-        state.jobAdded = false;
       })
       .addCase(createJob.fulfilled, (state) => {
-        state.jobAdded = true;
+        state.addJobSuccess = true;
         state.loading = false;
       })
       .addCase(createJob.rejected, (state, action) => {
         state.loading = false;
-        state.jobAdded = false;
       })
       .addCase(deleteJob.fulfilled, (state, { payload }) => {
-        state.jobDeleted = true;
+        state.deleteJobSuccess = true;
       })
       .addCase(deleteJob.rejected, (state, action) => {
-        state.jobDeleted = false;
-        state.deleteError = action.error.message;
+        state.deleteJobSuccess = false;
+        state.deleteJobError = true;
       })
       .addCase(editJob.pending, (state) => {
         state.loading = true;

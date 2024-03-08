@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
@@ -13,7 +14,6 @@ import {
 } from '../../state/slices/jobSlice';
 import { RootState } from '../../state/store/store';
 
-// TODO: add toast for job added successfully
 const AddJob = () => {
   const {
     loading,
@@ -28,7 +28,8 @@ const AddJob = () => {
     jobType,
     createdAt,
     status,
-    jobAdded,
+    addJobSuccess,
+    addJobError,
   } = useAppSelector((state: RootState) => state.job);
 
   const user = useAppSelector((state: RootState) => state.user.user);
@@ -81,26 +82,20 @@ const AddJob = () => {
     if (user?.isDemo) return;
     const name = e.target.name as keyof JobState;
     const value = e.target.value;
-    console.log(
-      'name',
-      name,
-      'value',
-      value,
-      'status',
-      status,
-      'jobType',
-      jobType
-    );
     dispatch(handleJobChange({ name, value }));
   };
 
-  //   useEffect(() => {
-  //     if (jobAdded) {
-  //       toast.success('Job added successfully');
-  //     } else {
-  //       toast.error('Error adding job; please try again');
-  //     }
-  //   }, [jobAdded]);
+  useEffect(() => {
+    if (addJobSuccess) {
+      toast.success('Job added successfully');
+    }
+  }, [addJobSuccess]);
+
+  useEffect(() => {
+    if (addJobError) {
+      toast.error('Error adding job, please try again');
+    }
+  }, [addJobError]);
 
   return (
     <Wrapper>
