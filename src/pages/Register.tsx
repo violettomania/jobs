@@ -36,7 +36,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error && error !== 'Rejected') {
       toast.error(error);
     }
   }, [error]);

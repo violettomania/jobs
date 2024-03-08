@@ -26,7 +26,7 @@ const Login = () => {
     if (!email || !password) {
       toast.error('Please fill out all fields');
     } else {
-      if (user) dispatch(loginUser({ email, password, token: user.token }));
+      dispatch(loginUser({ email, password, token: user?.token || '' }));
     }
   };
 
@@ -42,8 +42,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log('error', error);
-    if (error) {
+    if (error && error !== 'Rejected') {
       toast.error(error);
     }
   }, [error]);
@@ -54,7 +53,6 @@ const Login = () => {
     }
   }, [loggedIn, navigate]);
 
-  // TODO login button unresponsive
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>
