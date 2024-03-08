@@ -40,7 +40,8 @@ const Profile = () => {
       toast.success('user info updated. Please log in again to see changes.');
       dispatch(finishUserUpdate());
     }
-  }, [dispatch, user, userUpdated]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userUpdated]);
 
   useEffect(() => {
     if (error) {

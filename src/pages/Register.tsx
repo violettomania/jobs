@@ -47,7 +47,8 @@ const Register = () => {
       toast.success('registration successful');
       navigate('/login');
     }
-  }, [registerPending, navigate, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [registerPending]);
 
   return (
     <Wrapper className='full-page'>
