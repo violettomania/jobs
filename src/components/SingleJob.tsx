@@ -12,14 +12,25 @@ import JobInfo from './JobInfo';
 
 interface JobProps {
   job: Job;
+  onDeleteJob: () => void;
 }
 
-const SingleJob = ({ job }: JobProps) => {
+const SingleJob = ({ job, onDeleteJob }: JobProps) => {
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
 
   const date = moment(job.createdAt).format('MMM Do, YYYY');
+
+  const handleDeleteJob = () => {
+    dispatch(
+      deleteJob({
+        jobId: job._id,
+        token: user ? user?.token : '',
+      })
+    );
+    onDeleteJob();
+  };
 
   return (
     <Wrapper>
@@ -56,11 +67,7 @@ const SingleJob = ({ job }: JobProps) => {
             <button
               type='button'
               className='btn delete-btn'
-              onClick={() =>
-                dispatch(
-                  deleteJob({ jobId: job._id, token: user ? user?.token : '' })
-                )
-              }
+              onClick={handleDeleteJob}
             >
               delete
             </button>

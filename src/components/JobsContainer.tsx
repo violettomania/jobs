@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/JobsContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
@@ -22,9 +23,28 @@ const JobsContainer = () => {
     sort,
   } = useAppSelector((state: RootState) => state.jobs);
 
+  const deleteJobError = useAppSelector(
+    (state: RootState) => state.job.deleteJobError
+  );
+
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
+
+  const handleDeleteJob = () => {
+    if (user) {
+      dispatch(
+        fetchJobs({
+          page,
+          searchTerm,
+          status,
+          jobType,
+          sort,
+          token: user.token,
+        })
+      );
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -40,6 +60,14 @@ const JobsContainer = () => {
       );
     }
   }, [dispatch, jobType, page, searchTerm, sort, status, user, user?.token]);
+
+  useEffect(() => {
+    if (deleteJobError) {
+      toast.error(
+        'An error happened while deleting the job. Please try again.'
+      );
+    }
+  }, [deleteJobError]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -60,7 +88,9 @@ const JobsContainer = () => {
       </h5>
       <div className='jobs'>
         {jobs.map((job) => {
-          return <SingleJob key={job._id} job={job} />;
+          return (
+            <SingleJob key={job._id} job={job} onDeleteJob={handleDeleteJob} />
+          );
         })}
       </div>
       {numOfPages > 1 && <Pagination />}
