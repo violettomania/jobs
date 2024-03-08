@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
+import Wrapper from '../assets/wrappers/ChartsContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchJobStats } from '../state/actions/fetchJobStats';
 import { RootState } from '../state/store/store';
@@ -37,10 +38,14 @@ const JobStats = () => {
       ) : (
         <>
           <JobStatsContainer jobStats={jobStats} />
-          {jobStats.monthlyApplications.length > 0 && (
+          {jobStats.monthlyApplications.length > 0 ? (
             <ChartsContainer
               monthlyApplications={jobStats.monthlyApplications}
             />
+          ) : (
+            <Wrapper>
+              <h5>No charts to display</h5>
+            </Wrapper>
           )}
         </>
       )}
