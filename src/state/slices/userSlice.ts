@@ -10,15 +10,15 @@ export interface UserState {
   error?: string;
 }
 
-interface RegisterState {
+export interface RegisterState {
   registerPending: boolean;
 }
 
-interface LoginState {
+export interface LoginState {
   loggedIn: boolean;
 }
 
-interface UpdateState {
+export interface UpdateState {
   updated: boolean;
 }
 

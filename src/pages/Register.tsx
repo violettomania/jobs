@@ -81,13 +81,6 @@ const Register = () => {
         <button type='submit' className='btn btn-block' disabled={loading}>
           {loading ? 'loading...' : 'submit'}
         </button>
-        <button
-          type='button'
-          className='btn btn-block btn-hipster'
-          disabled={loading}
-        >
-          {loading ? 'loading...' : 'demo app'}
-        </button>
         <p>
           Already a member?{' '}
           <Link to='/login' type='button' className='member-btn'>
