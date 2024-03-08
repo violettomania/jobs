@@ -47,14 +47,15 @@ const SearchContainer = () => {
     };
   }, [dispatch]);
 
-  const handleClick = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setSearchTerm('');
     dispatch(clearFilters());
   };
 
   return (
     <Wrapper>
-      <form className='form'>
+      <form className='form' onSubmit={handleSubmit}>
         <h4>search form</h4>
         <div className='form-center'>
           {/* search position */}
@@ -89,11 +90,7 @@ const SearchContainer = () => {
             list={sortOptions}
             labelText='sort by'
           />
-          <button
-            className='btn btn-block btn-danger'
-            disabled={loading}
-            onClick={handleClick}
-          >
+          <button className='btn btn-block btn-danger' disabled={loading}>
             clear filters
           </button>
         </div>
