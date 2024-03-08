@@ -68,6 +68,14 @@ const jobSlice = createSlice({
     flagJobAsBeingEdited: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
     },
+    resetErrorsAndSuccesses: (state) => {
+      state.addJobSuccess = false;
+      state.addJobError = false;
+      state.deleteJobSuccess = false;
+      state.deleteJobError = false;
+      state.editJobSuccess = false;
+      state.editJobError = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -85,7 +93,6 @@ const jobSlice = createSlice({
         state.deleteJobSuccess = true;
       })
       .addCase(deleteJob.rejected, (state) => {
-        state.deleteJobSuccess = false;
         state.deleteJobError = true;
       })
       .addCase(editJob.pending, (state) => {
@@ -102,7 +109,11 @@ const jobSlice = createSlice({
   },
 });
 
-export const { handleJobChange, clearValues, flagJobAsBeingEdited } =
-  jobSlice.actions;
+export const {
+  handleJobChange,
+  clearValues,
+  flagJobAsBeingEdited,
+  resetErrorsAndSuccesses,
+} = jobSlice.actions;
 
 export default jobSlice.reducer;

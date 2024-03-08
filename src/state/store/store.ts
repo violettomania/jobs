@@ -32,7 +32,7 @@ const saveSubsetFilter = createTransform<
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user', 'jobStats'],
+  whitelist: ['user'],
   transforms: [saveSubsetFilter],
 };
 

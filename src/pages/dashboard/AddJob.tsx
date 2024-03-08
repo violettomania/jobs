@@ -12,6 +12,7 @@ import {
   handleJobChange,
   clearValues,
   JobState,
+  resetErrorsAndSuccesses,
 } from '../../state/slices/jobSlice';
 import { RootState } from '../../state/store/store';
 
@@ -93,19 +94,24 @@ const AddJob = () => {
   useEffect(() => {
     if (addJobSuccess) {
       toast.success('Job added successfully');
+      dispatch(resetErrorsAndSuccesses());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addJobSuccess]);
 
   useEffect(() => {
     if (addJobError) {
       toast.error('Error adding job, please try again');
+      dispatch(resetErrorsAndSuccesses());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addJobError]);
 
   useEffect(() => {
     if (editJobSuccess) {
       navigate('/jobs');
       toast.success('Job edited successfully');
+      dispatch(resetErrorsAndSuccesses());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editJobSuccess]);
@@ -113,7 +119,9 @@ const AddJob = () => {
   useEffect(() => {
     if (editJobError) {
       toast.error('Error editing job, please try again');
+      dispatch(resetErrorsAndSuccesses());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editJobError]);
 
   return (
