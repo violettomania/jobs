@@ -23,28 +23,13 @@ const JobsContainer = () => {
     sort,
   } = useAppSelector((state: RootState) => state.jobs);
 
-  const deleteJobError = useAppSelector(
-    (state: RootState) => state.job.deleteJobError
+  const { deleteJobError, deleteJobSuccess } = useAppSelector(
+    (state: RootState) => state.job
   );
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
-
-  const handleDeleteJob = () => {
-    if (user) {
-      dispatch(
-        fetchJobs({
-          page,
-          searchTerm,
-          status,
-          jobType,
-          sort,
-          token: user.token,
-        })
-      );
-    }
-  };
 
   useEffect(() => {
     if (user) {
@@ -69,6 +54,22 @@ const JobsContainer = () => {
     }
   }, [deleteJobError]);
 
+  useEffect(() => {
+    if (deleteJobSuccess && user) {
+      dispatch(
+        fetchJobs({
+          page,
+          searchTerm,
+          status,
+          jobType,
+          sort,
+          token: user.token,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deleteJobSuccess]);
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -88,9 +89,7 @@ const JobsContainer = () => {
       </h5>
       <div className='jobs'>
         {jobs.map((job) => {
-          return (
-            <SingleJob key={job._id} job={job} onDeleteJob={handleDeleteJob} />
-          );
+          return <SingleJob key={job._id} job={job} />;
         })}
       </div>
       {numOfPages > 1 && <Pagination />}

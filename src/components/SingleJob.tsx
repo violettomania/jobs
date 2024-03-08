@@ -12,10 +12,9 @@ import JobInfo from './JobInfo';
 
 interface JobProps {
   job: Job;
-  onDeleteJob: () => void;
 }
 
-const SingleJob = ({ job, onDeleteJob }: JobProps) => {
+const SingleJob = ({ job }: JobProps) => {
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
@@ -29,7 +28,6 @@ const SingleJob = ({ job, onDeleteJob }: JobProps) => {
         token: user ? user?.token : '',
       })
     );
-    onDeleteJob();
   };
 
   return (
