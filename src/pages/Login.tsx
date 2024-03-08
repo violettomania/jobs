@@ -41,8 +41,8 @@ const Login = () => {
     );
   };
 
-  // TODO: there's no error for not registered user
   useEffect(() => {
+    console.log('error', error);
     if (error) {
       toast.error(error);
     }

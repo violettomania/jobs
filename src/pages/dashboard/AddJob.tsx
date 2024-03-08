@@ -105,7 +105,7 @@ const AddJob = () => {
   useEffect(() => {
     if (editJobSuccess) {
       navigate('/jobs');
-      toast.error('Job edited successfully');
+      toast.success('Job edited successfully');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editJobSuccess]);
