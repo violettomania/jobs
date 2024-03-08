@@ -5,7 +5,7 @@ import { fetchJobStats } from '../actions/fetchJobStats';
 interface JobStatsState {
   jobStats: JobStats;
   loading: boolean;
-  error?: string;
+  error: boolean;
 }
 
 const initialState: JobStatsState = {
@@ -18,7 +18,7 @@ const initialState: JobStatsState = {
     monthlyApplications: [],
   },
   loading: false,
-  error: '',
+  error: false,
 };
 
 export const jobStatsSlice = createSlice({
@@ -29,14 +29,16 @@ export const jobStatsSlice = createSlice({
     builder
       .addCase(fetchJobStats.pending, (state) => {
         state.loading = true;
+        state.error = false;
       })
       .addCase(fetchJobStats.fulfilled, (state, action) => {
         state.jobStats = action.payload;
         state.loading = false;
+        state.error = false;
       })
-      .addCase(fetchJobStats.rejected, (state, action) => {
+      .addCase(fetchJobStats.rejected, (state) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = true;
       });
   },
 });
