@@ -5,13 +5,7 @@ import { deleteJob } from '../actions/deleteJob';
 import { editJob } from '../actions/editJob';
 
 export interface JobState {
-  _id: string;
-  position: string;
-  company: string;
-  jobLocation: string;
-  jobType: string;
-  createdAt: string;
-  status: string;
+  job: Job;
   jobTypeOptions: string[];
   statusOptions: string[];
   isEditing: boolean;
@@ -26,13 +20,15 @@ export interface JobState {
 }
 
 const initialState: JobState = {
-  _id: '',
-  position: '',
-  company: '',
-  jobLocation: '',
-  jobType: 'full-time',
-  createdAt: '',
-  status: 'interview',
+  job: {
+    _id: '',
+    position: '',
+    company: '',
+    jobLocation: '',
+    jobType: 'full-time',
+    createdAt: '',
+    status: 'interview',
+  },
   jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
   statusOptions: ['interview', 'declined', 'pending'],
   isEditing: false,
@@ -53,11 +49,23 @@ const jobSlice = createSlice({
     handleJobChange: (
       state,
       action: PayloadAction<{
-        name: keyof JobState;
-        value: JobState[keyof JobState];
+        name: keyof JobState & keyof Job;
+        value: JobState[keyof JobState] & Job[keyof Job];
       }>
     ) => {
-      (state as any)[action.payload.name] = action.payload.value;
+      const jobStateKeys = Object.keys(state) as Array<keyof JobState>;
+      const isKeyOfJobState = jobStateKeys.includes(action.payload.name);
+
+      const jobKeys = Object.keys(state.job) as Array<keyof Job>;
+      const isKeyOfJob = jobKeys.includes(action.payload.name);
+
+      if (isKeyOfJobState) {
+        (state as any)[action.payload.name] = action.payload.value;
+      }
+
+      if (isKeyOfJob) {
+        state.job[action.payload.name as keyof Job] = action.payload.value;
+      }
     },
     clearValues: () => {
       return {

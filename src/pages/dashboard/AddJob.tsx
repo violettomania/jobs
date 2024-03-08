@@ -18,18 +18,12 @@ import { RootState } from '../../state/store/store';
 
 const AddJob = () => {
   const {
+    job,
     loading,
     jobTypeOptions,
     statusOptions,
     isEditing,
     editedJobId,
-    _id,
-    position,
-    company,
-    jobLocation,
-    jobType,
-    createdAt,
-    status,
     addJobSuccess,
     addJobError,
     editJobSuccess,
@@ -45,19 +39,10 @@ const AddJob = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (user?.isDemo) return;
-    if (!position || !company || !jobLocation) {
+    if (!job.position || !job.company || !job.jobLocation) {
       toast.error('Please fill out all fields');
       return;
     }
-    const job = {
-      _id,
-      position,
-      company,
-      jobLocation,
-      jobType,
-      createdAt,
-      status,
-    };
     if (user) {
       if (isEditing) {
         dispatch(
@@ -71,11 +56,11 @@ const AddJob = () => {
       }
       dispatch(
         createJob({
-          company,
-          jobLocation,
-          jobType,
-          position,
-          status,
+          company: job.company,
+          jobLocation: job.jobLocation,
+          jobType: job.jobType,
+          position: job.position,
+          status: job.status,
           token: user?.token,
         })
       );
@@ -86,7 +71,7 @@ const AddJob = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     if (user?.isDemo) return;
-    const name = e.target.name as keyof JobState;
+    const name = e.target.name as keyof JobState & keyof Job;
     const value = e.target.value;
     dispatch(handleJobChange({ name, value }));
   };
@@ -133,7 +118,7 @@ const AddJob = () => {
           <FormRow
             type='text'
             name='position'
-            value={position}
+            value={job.position}
             handleChange={handleJobInput}
             disabled={loading || user?.isDemo}
           />
@@ -141,7 +126,7 @@ const AddJob = () => {
           <FormRow
             type='text'
             name='company'
-            value={company}
+            value={job.company}
             handleChange={handleJobInput}
             disabled={loading || user?.isDemo}
           />
@@ -150,7 +135,7 @@ const AddJob = () => {
             type='text'
             name='jobLocation'
             labelText='job location'
-            value={jobLocation}
+            value={job.jobLocation}
             handleChange={handleJobInput}
             disabled={loading || user?.isDemo}
           />
@@ -158,7 +143,7 @@ const AddJob = () => {
           <FormRowSelect
             name='status'
             labelText='status'
-            value={status}
+            value={job.status}
             handleChange={handleJobInput}
             list={statusOptions}
             disabled={user?.isDemo}
@@ -167,7 +152,7 @@ const AddJob = () => {
           <FormRowSelect
             name='jobType'
             labelText='job type'
-            value={jobType}
+            value={job.jobType}
             handleChange={handleJobInput}
             list={jobTypeOptions}
             disabled={user?.isDemo}
