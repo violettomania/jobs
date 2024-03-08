@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
@@ -30,11 +31,15 @@ const AddJob = () => {
     status,
     addJobSuccess,
     addJobError,
+    editJobSuccess,
+    editJobError,
   } = useAppSelector((state: RootState) => state.job);
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,6 +101,20 @@ const AddJob = () => {
       toast.error('Error adding job, please try again');
     }
   }, [addJobError]);
+
+  useEffect(() => {
+    if (editJobSuccess) {
+      navigate('/jobs');
+      toast.error('Job edited successfully');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editJobSuccess]);
+
+  useEffect(() => {
+    if (editJobError) {
+      toast.error('Error editing job, please try again');
+    }
+  }, [editJobError]);
 
   return (
     <Wrapper>

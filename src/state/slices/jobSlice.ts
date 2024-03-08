@@ -20,6 +20,8 @@ export interface JobState {
   addJobError: boolean;
   deleteJobSuccess: boolean;
   deleteJobError: boolean;
+  editJobSuccess: boolean;
+  editJobError: boolean;
   editedJobId: string;
 }
 
@@ -39,6 +41,8 @@ const initialState: JobState = {
   addJobError: false,
   deleteJobSuccess: false,
   deleteJobError: false,
+  editJobSuccess: false,
+  editJobError: false,
   editedJobId: '',
 };
 
@@ -88,11 +92,12 @@ const jobSlice = createSlice({
         state.loading = true;
       })
       .addCase(editJob.fulfilled, (state) => {
-        // TODO: add job
         state.loading = false;
+        state.editJobSuccess = true;
       })
       .addCase(editJob.rejected, (state) => {
         state.loading = false;
+        state.editJobError = true;
       });
   },
 });
