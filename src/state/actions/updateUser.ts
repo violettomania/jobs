@@ -21,9 +21,9 @@ export const updateUser = createAsyncThunk(
         },
       });
       return response.data;
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        return thunkAPI.rejectWithValue(error.message);
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data.msg);
       }
       return thunkAPI.rejectWithValue('An error occurred');
     }

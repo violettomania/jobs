@@ -67,7 +67,7 @@ export const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload as string;
         state.registerPending = false;
         state.loggedIn = false;
       })
@@ -82,7 +82,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload as string;
         state.loggedIn = false;
       })
       .addCase(updateUser.pending, (state) => {
@@ -90,14 +90,14 @@ export const userSlice = createSlice({
         state.updated = false;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        // TODO: updating user does not change userName in Navbar
         state.user = { ...state.user, ...action.payload };
         state.loading = false;
         state.updated = true;
       })
       .addCase(updateUser.rejected, (state, action) => {
+        console.log(action);
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload as string;
         state.updated = false;
       });
   },

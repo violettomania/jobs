@@ -45,7 +45,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error('an error occurred while updating user info');
+      toast.error(error);
     }
   }, [error]);
 
