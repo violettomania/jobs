@@ -37,7 +37,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (userUpdated) {
-      toast.success('user info updated');
+      toast.success('user info updated. Please log in again to see changes.');
       dispatch(finishUserUpdate());
     }
   }, [dispatch, user, userUpdated]);
