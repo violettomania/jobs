@@ -74,13 +74,13 @@ const jobSlice = createSlice({
         state.addJobSuccess = true;
         state.loading = false;
       })
-      .addCase(createJob.rejected, (state, action) => {
+      .addCase(createJob.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(deleteJob.fulfilled, (state, { payload }) => {
+      .addCase(deleteJob.fulfilled, (state) => {
         state.deleteJobSuccess = true;
       })
-      .addCase(deleteJob.rejected, (state, action) => {
+      .addCase(deleteJob.rejected, (state) => {
         state.deleteJobSuccess = false;
         state.deleteJobError = true;
       })
@@ -91,7 +91,7 @@ const jobSlice = createSlice({
         // TODO: add job
         state.loading = false;
       })
-      .addCase(editJob.rejected, (state, { payload }) => {
+      .addCase(editJob.rejected, (state) => {
         state.loading = false;
       });
   },
