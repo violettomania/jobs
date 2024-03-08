@@ -95,7 +95,6 @@ export const userSlice = createSlice({
         state.updated = true;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        console.log(action);
         state.loading = false;
         state.error = action.payload as string;
         state.updated = false;
