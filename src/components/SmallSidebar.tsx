@@ -1,4 +1,5 @@
 import { FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/SmallSidebar';
 
@@ -19,7 +20,9 @@ export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
             <FaTimes />
           </button>
           <header>
-            <Logo />
+            <Link to='/'>
+              <Logo />
+            </Link>
           </header>
           <NavLinks onSidebarToggle={onSidebarToggle} />
         </div>

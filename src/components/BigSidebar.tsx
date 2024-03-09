@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import Wrapper from '../assets/wrappers/BigSidebar';
 
 import NavLinks from './NavLinks';
@@ -18,7 +20,9 @@ const BigSidebar = ({ showSidebar }: BigSidebarProps) => {
       >
         <div className='content'>
           <header>
-            <Logo />
+            <Link to='/'>
+              <Logo />
+            </Link>
           </header>
           <NavLinks />
         </div>
