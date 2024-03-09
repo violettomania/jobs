@@ -56,11 +56,13 @@ const AddJob = () => {
       }
       dispatch(
         createJob({
-          company: job.company,
-          jobLocation: job.jobLocation,
-          jobType: job.jobType,
-          position: job.position,
-          status: job.status,
+          job: {
+            company: job.company,
+            jobLocation: job.jobLocation,
+            jobType: job.jobType,
+            position: job.position,
+            status: job.status,
+          },
           token: user?.token,
         })
       );

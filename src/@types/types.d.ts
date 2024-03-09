@@ -30,3 +30,5 @@ interface Job {
   createdAt: string;
   status: string;
 }
+
+type JobToCreate = Omit<Job, '_id' | 'createdAt'>;
