@@ -1,7 +1,8 @@
 import Wrapper from '../assets/wrappers/BigSidebar';
-import Logo from '../components/Logo';
 
 import NavLinks from './NavLinks';
+
+import { Logo } from '.';
 
 interface BigSidebarProps {
   showSidebar: boolean;
