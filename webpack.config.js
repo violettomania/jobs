@@ -38,6 +38,10 @@ module.exports = {
         test: /\.css$/, // Match .css files
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.svg$/, // Match .svg files
+        use: ['file-loader'],
+      },
     ],
   },
   plugins: [
