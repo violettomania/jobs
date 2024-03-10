@@ -17,7 +17,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/, // Match .ts and .tsx files
+        test: /\.tsx?$/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -36,17 +36,24 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.js$/, // Match .js files
+        test: /\.js$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/, // Match .css files
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.svg$/, // Match .svg files
-        use: ['file-loader'],
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: '../',
+            },
+          },
+        ],
       },
     ],
   },
