@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: 'app.bundle.js',
     path: path.join(__dirname, '_site'),
-    publicPath: './',
+    publicPath: '/',
   },
   mode: 'production',
   module: {
