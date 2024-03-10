@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
+import AddJob from '../pages/dashboard/AddJob';
 import Jobs from '../pages/dashboard/Jobs';
 import Profile from '../pages/dashboard/Profile';
 import SharedLayout from '../pages/dashboard/SharedLayout';
@@ -9,8 +10,6 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 
 import JobStats from './JobStats';
-
-import AddJob from '@/pages/dashboard/AddJob';
 
 export default function App() {
   return (
