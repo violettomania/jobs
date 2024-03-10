@@ -59,7 +59,7 @@ module.exports = {
       patterns: [
         {
           from: 'public',
-          to: './',
+          to: '/',
           globOptions: {
             ignore: ['**/index.html'],
           },
