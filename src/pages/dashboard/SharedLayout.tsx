@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Wrapper from '../../assets/wrappers/SharedLayout';
 import BigSidebar from '../../components/BigSidebar';
@@ -8,7 +8,11 @@ import SmallSidebar from '../../components/SmallSidebar';
 import { useAppSelector } from '../../hooks/reduxHooksWrapper';
 import { RootState } from '../../state/store/store';
 
-const SharedLayout = () => {
+interface SharedLayoutProps {
+  children: React.ReactNode;
+}
+
+const SharedLayout = ({ children }: SharedLayoutProps) => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
   const [bigSidebarOpen, setBigSidebarOpen] = useState(true);
 
@@ -27,7 +31,7 @@ const SharedLayout = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate('/landing');
+      navigate('/');
     }
   }, [navigate, user]);
 
@@ -44,9 +48,7 @@ const SharedLayout = () => {
               onSidebarToggle={handleBigSidebarToggle}
               userName={user ? user.name : ''}
             />
-            <div className='dashboard-page'>
-              <Outlet />
-            </div>
+            <div className='dashboard-page'>{children}</div>
           </div>
         </main>
       </Wrapper>

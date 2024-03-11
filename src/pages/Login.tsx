@@ -49,14 +49,14 @@ const Login = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      navigate('/');
+      navigate('/stats');
     }
   }, [loggedIn, navigate]);
 
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>
-        <Link to='/landing'>
+        <Link to='/'>
           <LogoImage />
         </Link>
         <h3>Login</h3>

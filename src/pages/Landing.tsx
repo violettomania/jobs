@@ -9,7 +9,7 @@ const Landing = () => {
     <Wrapper>
       <main>
         <nav>
-          <Link to='/landing'>
+          <Link to='/'>
             <LogoImage />
           </Link>
         </nav>

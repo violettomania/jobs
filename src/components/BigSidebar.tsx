@@ -19,7 +19,7 @@ const BigSidebar = ({ showSidebar }: BigSidebarProps) => {
       >
         <div className='content'>
           <header>
-            <Link to='/'>
+            <Link to='/stats'>
               <LogoImage />
             </Link>
           </header>

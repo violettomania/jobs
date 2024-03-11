@@ -31,4 +31,5 @@ const NavLinks = ({ onSidebarToggle }: NavLinksProps) => {
     </div>
   );
 };
+
 export default NavLinks;
