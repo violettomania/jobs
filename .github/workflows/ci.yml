@@ -23,6 +23,11 @@ jobs:
       - name: Install dependencies ⚙
         run: npm install
 
+      - name: Bump version 🆙
+        run: npm version patch -m "Bump version to %s"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build 🏗️
         run: npm run build
 

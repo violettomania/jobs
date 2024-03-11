@@ -378,3 +378,8 @@ ul {
   align-items: center;
   margin-top: 25px;
 }
+
+.version-info {
+  display: flex;
+  justify-content: center;
+}
