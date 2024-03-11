@@ -4,6 +4,8 @@ import Wrapper from '../assets/wrappers/LandingPage';
 import LogoImage from '../components/svg/LogoImage';
 import MainImage from '../components/svg/MainImage';
 
+const version = process.env.npm_package_version;
+
 const Landing = () => {
   return (
     <Wrapper>
@@ -30,6 +32,9 @@ const Landing = () => {
           <span className='img main-img'>
             <MainImage />
           </span>
+        </div>
+        <div className='version-info'>
+          <p>Version: {version}</p>
         </div>
       </main>
     </Wrapper>
