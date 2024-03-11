@@ -23,8 +23,18 @@ jobs:
       - name: Install dependencies ⚙
         run: npm install
 
+      - name: Set up Git user
+        run: |
+          git config --global user.name "violettomania"
+          git config --global user.email "danielpolya@protonmail.com"
+
       - name: Bump version 🆙
         run: npm version patch -m "Bump version to %s"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push changes 📤
+        run: git push --follow-tags
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
