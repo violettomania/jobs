@@ -1,8 +1,8 @@
-import main from 'assets/images/main.svg';
 import { Link } from 'react-router-dom';
 
 import Wrapper from '../assets/wrappers/LandingPage';
-import { Logo } from '../components';
+import LogoImage from '../components/svg/LogoImage';
+import MainImage from '../components/svg/MainImage';
 
 const Landing = () => {
   return (
@@ -10,7 +10,7 @@ const Landing = () => {
       <main>
         <nav>
           <Link to='/landing'>
-            <Logo />
+            <LogoImage />
           </Link>
         </nav>
         <div className='container page'>
@@ -27,7 +27,9 @@ const Landing = () => {
               Login/Register
             </Link>
           </div>
-          <img src={main} alt='job hunt' className='img main-img' />
+          <span className='img main-img'>
+            <MainImage />
+          </span>
         </div>
       </main>
     </Wrapper>
