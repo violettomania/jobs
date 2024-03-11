@@ -96,7 +96,7 @@ const AddJob = () => {
 
   useEffect(() => {
     if (editJobSuccess) {
-      navigate('/jobs');
+      navigate('/all-jobs');
       toast.success('Job edited successfully');
       dispatch(resetErrorsAndSuccesses());
     }

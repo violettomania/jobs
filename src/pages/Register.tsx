@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import Wrapper from '../assets/wrappers/RegisterPage';
-import { Logo } from '../components';
 import FormRow from '../components/FormRow';
+import LogoImage from '../components/svg/LogoImage';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { registerUser } from '../state/actions/registerUser';
 import { setRegisterPending } from '../state/slices/userSlice';
@@ -54,7 +54,7 @@ const Register = () => {
     <Wrapper className='full-page'>
       <form className='form' onSubmit={handleSubmit}>
         <Link to='/landing'>
-          <Logo />
+          <LogoImage />
         </Link>
         <h3>Register</h3>
         <FormRow

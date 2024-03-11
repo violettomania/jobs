@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../assets/wrappers/SmallSidebar';
 
 import NavLinks from './NavLinks';
-
-import { Logo } from '.';
+import LogoImage from './svg/LogoImage';
 
 interface SmallSidebarProps {
   onSidebarToggle: () => void;
@@ -21,7 +20,7 @@ export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
           </button>
           <header>
             <Link to='/'>
-              <Logo />
+              <LogoImage />
             </Link>
           </header>
           <NavLinks onSidebarToggle={onSidebarToggle} />

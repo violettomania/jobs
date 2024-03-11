@@ -17,7 +17,7 @@ export default function App() {
       <Route path='/landing' element={<Landing />} />
       <Route path='/' element={<SharedLayout />}>
         <Route index element={<JobStats />} />
-        <Route path='jobs' element={<Jobs />} />
+        <Route path='all-jobs' element={<Jobs />} />
         <Route path='add-job' element={<AddJob />} />
         <Route path='profile' element={<Profile />} />
       </Route>

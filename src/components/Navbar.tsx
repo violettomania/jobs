@@ -6,8 +6,6 @@ import Wrapper from '../assets/wrappers/Navbar';
 import { useAppDispatch } from '../hooks/reduxHooksWrapper';
 import { logout } from '../state/slices/userSlice';
 
-import { Logo } from '.';
-
 interface NavbarProps {
   onSidebarToggle: () => void;
   userName: string;
@@ -32,7 +30,6 @@ const Navbar = ({ onSidebarToggle, userName }: NavbarProps) => {
         </button>
         <div>
           <Link to='/'>
-            <Logo />
             <h3 className='logo-text'>dashboard</h3>
           </Link>
         </div>
