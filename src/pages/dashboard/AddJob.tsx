@@ -44,28 +44,31 @@ const AddJob = () => {
       return;
     }
     if (user) {
+      const jobToCreateOrEdit = {
+        company: job.company,
+        jobLocation: job.jobLocation,
+        jobType: job.jobType,
+        position: job.position,
+        status: job.status,
+      };
       if (isEditing) {
         dispatch(
           editJob({
             jobId: editedJobId,
-            job: { ...job },
+            job: { ...jobToCreateOrEdit },
             token: user?.token,
           })
         );
-        return;
+      } else {
+        dispatch(
+          createJob({
+            job: {
+              ...jobToCreateOrEdit,
+            },
+            token: user?.token,
+          })
+        );
       }
-      dispatch(
-        createJob({
-          job: {
-            company: job.company,
-            jobLocation: job.jobLocation,
-            jobType: job.jobType,
-            position: job.position,
-            status: job.status,
-          },
-          token: user?.token,
-        })
-      );
     }
   };
 
