@@ -4,7 +4,7 @@ import Wrapper from '../assets/wrappers/LandingPage';
 import LogoImage from '../components/svg/LogoImage';
 import MainImage from '../components/svg/MainImage';
 
-const version = process.env.npm_package_version;
+const version = process.env.REACT_APP_VERSION;
 
 const Landing = () => {
   return (
