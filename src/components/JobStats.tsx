@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import Wrapper from '../assets/wrappers/ChartsContainer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchJobStats } from '../state/actions/fetchJobStats';
+import { resetError } from '../state/slices/jobsStatsSlice';
 import { RootState } from '../state/store/store';
 
 import ChartsContainer from './ChartsContainer';
@@ -21,6 +22,7 @@ const JobStats = () => {
 
   useEffect(() => {
     if (user) dispatch(fetchJobStats({ token: user.token }));
+    resetError();
   }, [dispatch, user]);
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const JobStats = () => {
       toast.error(
         'An error happened while fetching job stats. Please try again.'
       );
+      resetError();
     }
   }, [error]);
 
