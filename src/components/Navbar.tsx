@@ -19,7 +19,7 @@ const Navbar = ({ onSidebarToggle, userName }: NavbarProps) => {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/landing');
+    navigate('/');
   };
 
   return (
@@ -29,7 +29,7 @@ const Navbar = ({ onSidebarToggle, userName }: NavbarProps) => {
           <FaAlignLeft />
         </button>
         <div>
-          <Link to='/'>
+          <Link to='/stats'>
             <h3 className='logo-text'>dashboard</h3>
           </Link>
         </div>

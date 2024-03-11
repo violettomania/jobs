@@ -19,7 +19,7 @@ export const SmallSidebar = ({ onSidebarToggle }: SmallSidebarProps) => {
             <FaTimes />
           </button>
           <header>
-            <Link to='/'>
+            <Link to='/stats'>
               <LogoImage />
             </Link>
           </header>
