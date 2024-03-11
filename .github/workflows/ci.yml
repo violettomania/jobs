@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@main
-        with:
-          persist-credentials: false
 
       - name: Set up Node.js 🔧
         uses: actions/setup-node@v4
@@ -34,9 +32,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes 📤
-        run: |
-          git config --global http.https://github.com/.extraheader "AUTHORIZATION: bearer ${{ secrets.GITHUB_TOKEN }}"
-          git push --follow-tags
+        run: git push --follow-tags
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
