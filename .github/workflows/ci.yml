@@ -34,7 +34,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changes 📤
-        run: git push --follow-tags
+        run: |
+          git push --follow-tags
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: bearer ${{ secrets.GITHUB_TOKEN }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
