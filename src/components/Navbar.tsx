@@ -6,8 +6,6 @@ import Wrapper from '../assets/wrappers/Navbar';
 import { useAppDispatch } from '../hooks/reduxHooksWrapper';
 import { logout } from '../state/slices/userSlice';
 
-import LogoImage from './svg/LogoImage';
-
 interface NavbarProps {
   onSidebarToggle: () => void;
   userName: string;
