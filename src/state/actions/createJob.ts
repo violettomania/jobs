@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import customFetch from '../../util/axiosWrapper';
 
 interface CreateJobArg {
-  job: JobToCreate;
+  job: JobToCreateOrEdit;
   token: string;
 }
 

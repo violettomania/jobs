@@ -4,7 +4,7 @@ import customFetch from '../../util/axiosWrapper';
 
 interface EditJobArg {
   jobId: string;
-  job: Job;
+  job: JobToCreateOrEdit;
   token: string;
 }
 
