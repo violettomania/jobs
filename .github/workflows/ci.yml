@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REACT_APP_VERSION: ${{ secrets.REACT_APP_VERSION }}
+      REACT_APP_VERSION: 1.1.2
 
     steps:
       - name: Checkout 🛎️
