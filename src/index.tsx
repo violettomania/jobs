@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/jobs'>
       <Provider store={store}>
         <PersistGate loading={<LoadingSpinner />} persistor={persistor}>
           <ErrorBoundary>
