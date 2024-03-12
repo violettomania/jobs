@@ -25,6 +25,8 @@ jobs:
 
       - name: Build 🏗️
         run: npm run build
+        env:
+          REACT_APP_VERSION: ${{ secrets.REACT_APP_VERSION }}
 
       - name: Upload artifacts ⬆️
         uses: actions/upload-pages-artifact@v3
