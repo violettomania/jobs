@@ -367,7 +367,7 @@ ul {
 }
 
 .not-found-img {
-  width: 100%;
+  width: 85%;
   display: block;
   object-fit: cover;
 }
@@ -376,10 +376,17 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .version-info {
   display: flex;
   justify-content: center;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25;
 }
