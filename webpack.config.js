@@ -78,6 +78,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       React: 'react',
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        REACT_APP_VERSION: JSON.stringify(process.env.REACT_APP_VERSION),
+      },
+    }),
   ],
   resolve: {
     alias: {
