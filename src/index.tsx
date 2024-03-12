@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 // eslint-disable-next-line import/order
 import { ToastContainer } from 'react-toastify';
 
@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename='/jobs'>
+    <HashRouter basename='/'>
       <Provider store={store}>
         <PersistGate loading={<LoadingSpinner />} persistor={persistor}>
           <ErrorBoundary>
@@ -30,7 +30,7 @@ root.render(
           </ErrorBoundary>
         </PersistGate>
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
     <ToastContainer position='bottom-right' />
   </React.StrictMode>
 );
