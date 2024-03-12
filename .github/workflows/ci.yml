@@ -28,12 +28,6 @@ jobs:
       - name: Build 🏗️
         run: npm run build
 
-      - name: Print environment variable
-        run: echo $REACT_APP_VERSION
-
-      - name: Print environment variables
-        run: printenv
-
       - name: Upload artifacts ⬆️
         uses: actions/upload-pages-artifact@v3
 
