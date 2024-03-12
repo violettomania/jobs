@@ -4,7 +4,7 @@ import Wrapper from '../assets/wrappers/LandingPage';
 import LogoImage from '../components/svg/LogoImage';
 import MainImage from '../components/svg/MainImage';
 
-// const version = process.env.REACT_APP_VERSION;
+const version = process.env.REACT_APP_VERSION;
 
 const Landing = () => {
   return (
@@ -33,9 +33,9 @@ const Landing = () => {
             <MainImage />
           </span>
         </div>
-        {/* <div className='version-info'>
+        <div className='version-info'>
           <p>Version: {version}</p>
-        </div> */}
+        </div>
       </main>
     </Wrapper>
   );
